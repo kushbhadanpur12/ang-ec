@@ -1,0 +1,189 @@
+.page-category #content > .section > .list-container > h1 {
+    margin-bottom: 25px!important;
+}
+
+.dialog {
+    border: 1px solid #e1dddd;
+    margin: 0 0 30px;
+    padding: 0;
+    page-break-inside: avoid;
+    border-radius: 3px 3px 0 0;
+}
+
+body .dialog .title {
+    background: #b5a27a none repeat scroll 0 0;
+    border-radius: 3px 3px 0 0;
+    border-bottom: 1px solid #b5a27a;
+}
+.dialog .content {
+    background: transparent none repeat scroll 0 0;
+    border: 0 none;
+    color: #58595b;
+    padding: 10px 10px 20px;
+    text-align: left;
+}
+
+.order-success-panel .content p {
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    color: #1e1e1e;
+    font-size: 13.5px;
+}
+
+.text-block {
+    margin-bottom: 15px;
+}
+
+.social-icon {
+    margin-bottom: 30px;
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+
+.social-images {
+    padding-top: 1%;
+    padding-left: 1%;
+}
+.social-images li {
+    display: inline;
+    padding-left: 4%;
+    padding-right: 4%;
+}
+
+.social-images a {
+    color: #878787;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.order-success-panel .social-icon img {
+    width: 3% !important;
+}
+
+.social-icon img {
+    vertical-align: middle;
+    width: 4%;
+}
+
+.order-success-panel {
+     width:100%!important; 
+     max-width:100%!important;
+}
+
+.target-checkoutSuccess .order-success-panel .dialog .title > h2 {
+    font-size: 1.1em;
+    font-weight: 600;
+    line-height: 26px;
+    letter-spacing: 1.5px;
+}
+
+
+body .dialog .title h2 {
+    color: #fff;
+    font-weight: bold;
+}
+
+.dialog .title h2 {
+    font-size: 13px;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    white-space: nowrap;
+}
+
+.dialog .title {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: -moz-use-text-color -moz-use-text-color #acb7c7;
+    border-image: none;
+    border-style: none none solid;
+    border-width: 0 0 1px;
+    color: #253161;
+    font-size: 13px;
+    font-weight: bold;
+    height: 30px;
+    line-height: 30px;
+    margin: 0;
+    overflow: hidden;
+    padding: 0 0 0 18px;
+    position: relative;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.order-logo {
+    padding-bottom: 25px;
+    padding-top: 10px;
+    text-align: center;
+}
+.order-logo img {
+    max-width: 200px !important;
+    max-height: 54px !important;
+}
+
+.order_tophr_line{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.order-invoice, .invoice-address-box{
+    width: 100%;
+}
+
+.address.shipping {
+    width: 38%;
+    margin-right: 20%;
+}
+.address.payment {
+    float: left;
+    margin-left: 20px;
+    width: 434px;
+}
+
+.invoice-box .items a {
+    font-size: 12px!important;
+    font-weight: 300 !important;
+}
+
+.invoice_product_details ul.selected-attribute-values li span {
+    font-size: 12px!important;
+    font-weight: 300 !important;
+}
+
+.invoice-box .totals {
+    margin-bottom: 0px;
+    white-space: nowrap;
+    width: 100%;
+    text-align: right;
+}
+
+.target-checkoutSuccess .order-invoice-continue-shopping {
+    margin: 40px auto;
+    text-align: center;
+    width: 100% !important;
+}
+.order-invoice-continue-shopping a {
+    background-color: #006395;
+    text-align: center;
+    padding: 11px 50px;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.order-invoice-continue-shopping a {
+    background-color: #b5a27a;
+}
+.order-invoice-continue-shopping {
+    width: 28.4%;
+    margin: 40px auto;
+}
+.buttom-company-address {
+    float: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}

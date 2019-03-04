@@ -1,0 +1,97 @@
+
+#breadcrumb{
+	margin-top:1px;
+}
+#contactpage{
+    margin-top: 8px;
+}
+#contactpage > h1{
+    margin-bottom: 6px;
+}
+.query-text{
+	border-bottom:0px;
+}
+.contactright .sales-el .email{
+	text-transform:lowercase;
+}
+#contactpage .btn{
+    padding: 10px 55px;
+	margin: 6px 0 0;
+	float: right;
+    font-weight: 500;
+}
+#contactpage iframe {
+    margin-top: 50px;
+    padding-bottom: 45px;
+}
+.store-info-address .tbl-gen td:first-child{
+    text-transform: capitalize;
+}
+#contact-site-form .table-value input .ng-invalid
+{
+    border: 1px solid red!important;
+}
+.alert, .alert-danger{
+    color: red;
+}
+#contact-site-form .table-value .form-control:focus{
+	border: 1px solid #d1d1d1;
+}
+.inline-error {
+    background: transparent none repeat scroll 0 0 !important;
+    border: medium none !important;
+    color: #ff0000 !important;
+    font-size: 13px !important;
+    font-weight: 300 !important;
+    background-color: #fff;
+    min-width: 100px;
+    text-align: center;
+    letter-spacing: 2px;
+	margin-top: -10px;
+    float: left;
+    font-style: inherit;
+}
+.myclass3, .myclass2, .myclass1, .myclass4{
+    border: 2px solid red!important;
+}
+
+.myclass1:focus{
+	border: 1px solid red!important;
+}
+.myclass2:focus{
+	border: 1px solid red!important;
+}
+.myclass3:focus{
+	border: 1px solid red!important;
+}
+.myclass4:focus{
+	border: 1px solid red!important;
+}
+
+
+@media (max-width: 1024px){
+    .innerPage {
+        padding: 10px 20px 0 20px;
+    }
+}
+
+@media (max-width: 767px){
+    .innerPage {
+        padding: 0px;
+    }
+    #contactpage{
+        padding: 25px 5px 8px 0;
+    }
+    #contactpage .btn{
+        font-size: 13px;
+        letter-spacing: 1px;
+    }
+}
+@media (max-width: 375px){
+    .store-info-address .tbl-gen td:first-child{
+        width: 105px;
+    }
+    .store-info-address .tbl-gen td:nth-child(2){
+        width: 92px;
+    }
+}

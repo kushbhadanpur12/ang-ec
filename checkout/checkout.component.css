@@ -1,0 +1,102 @@
+div.table-label {
+    width: 69px!important;
+}
+
+.chkout li{
+    display: inline-block;
+    width: 32%;
+    margin: 0px 2px;
+    text-align: center;
+    background: #f9f9f9;
+    padding: 11px;
+    cursor: pointer;
+}
+.checkout_fastlane_block_address-book-button {
+  
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding-left: 0;
+    padding-top: 7px;
+    float: none!important;
+}
+.checkout_fastlane_cart{
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+    float: left;
+    padding: 50px 20px;
+    width: 100%;
+}
+.required{
+   
+    border: 2px solid red;
+}
+.errmsg{
+    color:red;
+    font-size:14px;
+}
+
+.shipping_checkout{
+    font-size: 12px;
+    font-weight: normal;
+}
+.checkout_fastlane_address_edit_link{
+    margin: 0;
+    cursor: pointer;    
+}
+.card input {
+    color: #555;
+    line-height: normal;
+    padding: 9px 14px;
+    font-size: 1.143em;
+    margin-bottom: 0;
+    width: 100%;
+    border: #ddd 2px solid;
+    border-radius: 5px;
+    background-color: #fff;
+}
+.payments-radiolist li span{
+    display: inline-block; 
+}
+
+.payments-radiolist li{
+    padding-bottom: 14px;
+	clear:both;
+}
+.payment-list-label {    float: left;
+    padding: 18px 0px 0px;    line-height: 15px;
+    font-size: 15px;}
+
+    .p4l_calculator .result {
+        font-weight: 300;
+        color: #63656a;
+        border: 1px solid;
+        padding: 4% 6% 10% 4%;
+    }
+
+.addrbook{
+    list-style: none;
+    width: 278px;
+    float: left;
+    background: #f4f4f4 none;
+    border: 1px solid #dfdfdf;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    padding: 13px 10px 12px;
+    margin: 0px;
+    margin-right: 30px;
+    margin-bottom: 20px;
+    position: relative;
+    cursor: pointer;
+    min-height: 125px;
+    color:#000;
+}
+
+.cartLoader{ position:absolute; width:100%; height:100%; text-align:center;background: #fff;opacity: 0.8;z-index: 99;}
+.loadergif{
+    background: transparent url('../../assets/images/preloader2.gif') no-repeat left top / 50%;
+    width: 80px;
+    height: 80px;
+    margin: auto;
+    opacity: 1;
+}

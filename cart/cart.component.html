@@ -1,0 +1,205 @@
+<body class="">
+<div id="page-container">
+  <div id="page-container2" class="">
+    <div id="wrapper">
+      <app-mobilemenu></app-mobilemenu>
+      <div id="desktopheader">
+        <app-header></app-header>
+        <app-menu></app-menu>
+      </div>
+      <div id="main-wrapper">
+        <div id="main" class="clearfix">
+          <div class="innerPage">
+            <div class="wrap clearfix page-category ">
+              <!-- shopping cart started Here  -->
+              <div id="content" class="column">
+                <div class="section">
+                  <div class="list-container" data-group="center" *ngIf="results?.totalCartItems > 0 ">
+                    <h1 class="title" id="page-title"><span>Your shopping cart</span></h1>
+                    <div class="block block-block">
+                      <div class="content">
+                        <div id="cart" class="clearfix">
+                          <div id="shopping-cart">
+                            <div class="top-continue"> <a routerLink="/checkout.html" type="button" class="btn  regular-button regular-main-button checkout" > <span>Proceed to checkout</span> </a> </div>
+                            <div class="top-continue">
+                              <button type="button" class="btn  regular-button regular-main-button checkout" (click)="saveAbandonedcartData( results?.products[0].order_id)"> <span>Abandoned cart</span> </button>
+                            </div>
+                            <div *ngIf="abdcart?.length > 0 && checkabdcart"> {{ abdcart[0]?.message }} </div>
+                            <div class="cartContent">
+                              <div class="cartLoader" style="display:none;">
+                                <div class="loadergif"></div>
+                              </div>
+                              <table class="selected-products">
+                                <thead class="items head">
+                                  <tr class="selected-product">
+                                    <th class="item-thumbnail">Product Details</th>
+                                    <th class="item-info"></th>
+                                    <th class="item-qty">Qty</th>
+                                    <th class="item-price">Price</th>
+                                    <th class="item-subtotal">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody class="items">
+                                  <tr class="selected-product" *ngFor="let res of results?.products;let i = index">
+                                    <td class="item-thumbnail"><a routerLink="/{{ res.clean_url.cleanURL }}"><img src="{{ res.product_img[0].path }}" alt="Ladies Diamond Wedding Ring 9K White Gold - Princess Single Stone" width="200" height="210" data-max-width="200" data-max-height="0" data-is-default-image=""> </a></td>
+                                    <td class="item-info" ><p class="item-title"><a routerLink="/{{ res.clean_url.cleanUrl }}">{{ res.name}}</a></p>
+                                      <div class="item-attribute-values">
+                                        <ul class="selected-attribute-values">
+                                          <li *ngFor="let opt of res.attr_options;"> <span class="attrname">{{ opt.attribute_name }}</span> <span class="colon">:</span> {{ opt.attribute_option_name }} </li>
+                                        </ul>
+                                        <ul class="selected-attribute-values">
+                                          <li *ngIf="res.engrav_text?.length>0"> <span class="attrname">Engrave Text</span> <span class="colon">:</span> {{ res.engrav_text }}</li>
+                                        </ul>
+                                        <div class="item-change-attribute-values engraving-box"> <a (click)="getEngraving(res.id,res.order_id)" style="cursor: pointer;" >Add Engraving</a> </div>
+                                      </div></td>
+                                    <td class="item-qty"><div class="qtybxx"> <span class="quantity-box-container">
+                                        <select name="amount" class="selectquantity" [(ngModel)]="res.amount" (change)="changeQuantity($event,res.id,res.order_id)">
+                                          <option *ngFor="let c of count" value="{{ c }}">{{ c }}</option>
+                                        </select>
+                                        <input type="text" style="opacity:0; width:0; height:0; position:absolute" value="1" class="quantity watcher " id="" name="amount" title="Quantity">
+                                        </span> </div></td>
+                                    <td class="item-price"><span class="surcharge"> <span class="surcharge-cell"><span class="part-prefix">{{cust_currency?.prefix}}</span><span class="part-integer">{{ (res.price * cust_currency?.rate) | number:'1.1-2'}}</span></span> </span> </td>
+                                    <td class="item-remove delete-from-list"><span><img  class="btn  regular-button remove" src="../../assets/images/deletecart.png" title="Delete" alt="Delete" style="height: 9px;" (click)="removeOrderItem(res.id,res.order_id)"></span> </td>
+                                  </tr>
+                                </tbody>
+                                <tbody class="additional-items">
+                                </tbody>
+                              </table>
+                              <div id="cart-right">
+                                <ul *ngIf="results.OrderDetails?.order_coupon" class="totals">
+                                  <li class="subtotal"> <strong>Subtotal:</strong> <span class="cart-subtotal"> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{cust_currency?.prefix}}{{ (results?.OrderDetails.subtotal * cust_currency?.rate) | number:'1.1-2' }}</span> </span> </span> </span> </li>
+                                 
+                                  <li *ngIf="results.OrderDetails?.order_coupon.type=='P'" class="order-modifier DCOUPON-modifier dcoupon-code-modifier">
+                                  <strong>Coupon discount:</strong> <span class="value"> <span class="surcharge"> <span class="surcharge-cell"><span class="part-integer">{{cust_currency?.prefix}}{{ ((results?.OrderDetails.total * cust_currency?.rate) * (results.OrderDetails?.order_coupon.value / 100)) | number:'1.1-2' }}</span></span> </span> </span>
+                                      <ul class="discount-coupons-panel">
+                                        <li> <span>{{results.OrderDetails?.order_coupon.code}} ({{results.OrderDetails?.order_coupon.value}} %)</span> <a href="javascript:;" (click)="removeCouponCode(results.OrderDetails?.order_coupon.id)">Remove</a> </li>
+                                      </ul>
+                                    </li>
+                                    
+                                  <li *ngIf="results.OrderDetails?.order_coupon.type=='F'" class="order-modifier DCOUPON-modifier dcoupon-code-modifier">
+                                  <strong>Coupon discount:</strong> <span class="value"> <span class="surcharge"> <span class="surcharge-cell"><span class="part-integer">{{cust_currency?.prefix}}{{results.OrderDetails?.order_coupon.value}} </span></span> </span> </span>
+                                      <ul class="discount-coupons-panel">
+                                        <li> <span>{{results.OrderDetails?.order_coupon.code}}</span> <a href="javascript:;" (click)="removeCouponCode(results.OrderDetails?.order_coupon.id)">Remove</a> </li>
+                                      </ul>
+                                    </li>
+
+                                  <li class="order-modifier SHIPPING-modifier shipping-code-modifier"> <strong>Shipping cost:</strong> <span class="value"> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{cust_currency?.prefix}}0.00</span> </span> </span> </span> </li>
+                                  <li class="order-modifier CDEV.VAT.1-modifier cdev.vat.1-code-modifier"> <strong>VAT:</strong> <span class="value"> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{cust_currency?.prefix}}{{ ((results?.OrderDetails.total - results?.OrderDetails.subtotal) * cust_currency?.rate) | number:'1.1-2' }}</span> </span> </span> </span> </li>
+                                  <li class="subtotal real-charge real-charge-value" *ngIf="results?.OrderDetails.currency_id != results?.OrderDetails.multi_currency_id"> <strong>Total charge:</strong> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{results?.DefaultCurrency.prefix}}{{ results?.OrderDetails.total | number:'1.1-2' }}</span> </span> </span> </li>
+                                  <li class="currencyExNote" *ngIf="results?.OrderDetails.currency_id != results?.OrderDetails.multi_currency_id"> Note: All prices billed in {{results?.DefaultCurrency.code}} ({{results?.DefaultCurrency.prefix}}). Current exchange rate is {{cust_currency?.prefix}}1.00 = {{results?.DefaultCurrency.prefix}}{{ (1 / cust_currency?.rate) | number:'1.1-4' }}. </li>
+                                  <hr>
+                                  <li class="total"> <strong>Grand Total:</strong> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{cust_currency?.prefix}}{{ (results?.OrderDetails.total * cust_currency?.rate) | number:'1.1-2' }}</span> </span> </span> </li>
+                                  <li class="button main-button"> <a routerLink="/checkout.html" class="btn  regular-button regular-main-button checkout"> <span>Proceed to checkout</span> </a> </li>
+                                </ul>
+                                
+                                <ul *ngIf="!results.OrderDetails?.order_coupon" class="totals">
+                                  <li class="subtotal"> <strong>Subtotal:</strong> <span class="cart-subtotal"> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{cust_currency?.prefix}}{{ (results?.OrderDetails.subtotal * cust_currency?.rate) | number:'1.1-2' }}</span> </span> </span> </span> </li>
+                                  <li class="order-modifier SHIPPING-modifier shipping-code-modifier"> <strong>Shipping cost:</strong> <span class="value"> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{cust_currency?.prefix}}0.00</span> </span> </span> </span> </li>
+                                  <li class="order-modifier CDEV.VAT.1-modifier cdev.vat.1-code-modifier"> <strong>VAT:</strong> <span class="value"> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{cust_currency?.prefix}}{{ ((results?.OrderDetails.total - results?.OrderDetails.subtotal) * cust_currency?.rate) | number:'1.1-2' }}</span> </span> </span> </span> </li>
+                                  <li class="subtotal real-charge real-charge-value" *ngIf="results?.OrderDetails.currency_id != results?.OrderDetails.multi_currency_id"> <strong>Total charge:</strong> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{results?.DefaultCurrency.prefix}}{{ results?.OrderDetails.total | number:'1.1-2' }}</span> </span> </span> </li>
+                                  <li class="currencyExNote" *ngIf="results?.OrderDetails.currency_id != results?.OrderDetails.multi_currency_id"> Note: All prices billed in {{results?.DefaultCurrency.code}} ({{results?.DefaultCurrency.prefix}}). Current exchange rate is {{cust_currency?.prefix}}1.00 = {{results?.DefaultCurrency.prefix}}{{ (1 / cust_currency?.rate) | number:'1.1-4' }}. </li>
+                                  <hr>
+                                  <li class="total"> <strong>Grand Total:</strong> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{cust_currency?.prefix}}{{ (results?.OrderDetails.total * cust_currency?.rate) | number:'1.1-2' }}</span> </span> </span> </li>
+                                  <li class="button main-button"> <a routerLink="/checkout.html" class="btn  regular-button regular-main-button checkout"> <span>Proceed to checkout</span> </a> </li>
+                                </ul>
+                                
+                                <div class="box">
+                                  <div class="mobileconti helporder clearfix">
+                                    <div class="helporderContinueShopping"> <a type="button" class="btn  regular-button  action continue" routerLink="/" > <span>Continue shopping</span> </a> </div>
+                                  </div>
+
+
+                                  
+                                  <div class="coupons clearfix">
+                                    <div class="couponInner" *ngIf="!results.OrderDetails?.order_coupon">
+                                    	<div class="new more"> <a href="javascript:;" (click)="couponCode();"><span>Apply a coupon code</span></a> </div>
+                                        <div class="add-coupon clearfix" style="display:none">
+                                          <form action="http://test.angelicdiamonds.com/" method="post" accept-charset="utf-8" onSubmit="javascript: return true;" class="use-inline-error">
+                                            <span>Enter your voucher code if you have one.</span>
+                                            <div class="table-value code-value table-value-required"> <span class="input-field-wrapper input input-text">
+                                              <script type="text/x-cart-data"></script>
+                                              <input id="couponcode" name="couponcode" placeholder="Enter code" type="text" value=""
+                                               autocomplete="off" maxlength="16" class="validate[required,maxSize[16]] form-control"
+                                               [ngClass]="{myclass: shouldShow}"
+                                               >
+                                              </span> </div>
+                                              
+                                              <span>                                
+                                                <p *ngIf="reqCss" style="color: red;font-weight: 400;">
+                                                  This field is required
+                                                 </p>
+
+                                                <p *ngIf="couponInvalid" style="color: red;font-weight: 400;">
+                                                  Invalid coupon code, please check the spelling: " {{ couponcode }}"
+                                                </p> 
+
+                                                <p *ngIf="priceRangeInvalid" style="color: red;font-weight: 400;">
+                                                  This coupon can be applied only to orders with a subtotal amount not exceeding {{ orderamount }}
+                                                </p> 
+                                                
+                                            </span>
+                                            <button type="submit" class="btn regular-button submit add-coupon visible" style="display: none;" (click)="submitCouponCode()"><span>Apply Coupon</span></button>
+                                          </form>
+                                        </div>
+                                    </div>
+                                  </div>
+
+
+
+
+
+                                  
+                                  <div class="desktopconti helporder clearfix">
+                                    <div class="helporderContinueShopping">
+                                      <button type="button" class="btn  regular-button  action continue" onClick="javascript: self.location = 'http://localhost:4200/';"> <span>Continue shopping</span> </button>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="cartpaymentlogos"><img src="../../assets/images/paymentlogos.png" border="0"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div  *ngIf="results?.totalCartItems == 0 ">
+                    <h1 class="title" id="page-title"><span>YOUR CART IS EMPTY</span></h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <app-footer></app-footer>
+    </div>
+  </div>
+</div>
+<app-dialog [(visible)]="showDialog" >
+  <form [formGroup]="form" (ngSubmit)="updateengrave(form)" >
+    <br>
+    <h2> ADD ENGRAVING </h2>
+    <br>
+    <br>
+    <span class="title2">Engrave Font</span><br>
+    <select class="form-control engravefonts" [(ngModel)]="eng_font" type="text" formControlName="eng_font" >
+      <option value="">Select Font</option>
+      <option value="Helvetica">Helvetica</option>
+      <option value="Roman">Roman</option>
+      <option value="Lucida" >Lucida</option>
+      <option value="Castellar">Castellar</option>
+      <option value="Script">Script</option>
+    </select>
+    <br>
+    <br>
+    <div id="charNum" class="charNum">Maximum Characters 25</div>
+    <br>
+    <span class="title2">Engrave Text</span><br>
+    <input type="text" class="form-control eng_txt" [(ngModel)]="eng_text" formControlName="eng_text" id="eng_text_len" >
+    <br>
+    <div class="buttons">
+      <button type="submit" class="btn regular-button submit" name="button" > <span>Apply</span> </button>
+    </div>
+  </form>
+</app-dialog>

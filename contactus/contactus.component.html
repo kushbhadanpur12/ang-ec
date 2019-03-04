@@ -1,0 +1,236 @@
+<body class="">
+    <div id="page-container">
+      <div id="page-container2" class="">
+        <div id="wrapper"> 
+         <app-mobilemenu></app-mobilemenu>
+          <div id="desktopheader">
+            <app-header></app-header>
+            <app-menu></app-menu>
+            
+          </div>
+      
+          <div id="main-wrapper">   
+            <div id="main" class="clearfix">
+
+
+              <div class="innerPage">
+                <div class="mainwrap">
+                  <div class="wrap clearfix page-category">
+                    <div id="breadcrumb">
+                      <ul class="breadcrumb">
+                        <li class="location-node"> <a href="https://test.angelicdiamonds.com/" class="location-title home-link"><span>Home Page</span>
+                         
+                          </a> </li>
+                        <li class="location-node last"> <span class="location-text">Contact us</span> </li>
+                      </ul>
+                    </div>
+                    <div class="clear"></div>
+                    <div id="sidebar-first" class="column sidebar">
+                      <div class="section">
+                        <div class="list-container" data-group="sidebar">
+                          <div class="block block-block block-top-categories">
+                            <div class="head-h2">Categories</div>
+                            <div class="content">
+                              <ul class="menu menu-list catalog-categories catalog-categories-path">
+                                <li  class="first"> <a href="engagement-rings" >Engagement Rings</a> </li>
+                                <li > <a href="diamond-rings" >Diamond Rings</a> </li>
+                                <li > <a href="wedding-rings" >Wedding Rings</a> </li>
+                                <li > <a href="diamond-earrings" >Diamond Earrings</a> </li>
+                                <li > <a href="diamond-pendants" >Diamond Pendants</a> </li>
+                                <li > <a href="gemstone" >Gemstone</a> </li>
+                                <li > <a href="diamond-bracelets" >Diamond Bracelets</a> </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="content" class="column">
+                      <div class="section">
+                         
+                          
+                        <a id="main-content"></a>
+                        <div class="list-container" data-group="center">
+                          <div id="contactpage">
+                            <h1>Contact Us</h1>
+                            <p class="query-text"></p>
+                            <div class="contactleft">
+                               <p *ngIf="sentmsg" style="color:green;text-align:center">
+                                The message has been sent
+                                  </p>
+
+                              <form [formGroup]="form" (ngSubmit)="addUser(form)" novalidate > 
+                      
+                                <div id="contact-site-form">
+                                  <div class="form-item">
+                                    <label for="name"> Name <span class="form-required">*</span> </label>
+                                    <div class="table-value name-value table-value-required"> <span class="input-field-wrapper input-text">
+                                
+                                      <input [(ngModel)]="name" type="text" formControlName="name"
+                                      (input)="somethingChanged($event.target.value)"
+                                      [ngClass]="{myclass1: shouldShow1, 'form-control':true}" 
+                                      >
+                                      </span> 
+                                      <span>
+                                      <p class="inline-error"  *ngIf="mycss && form.get('name').hasError('required') ">
+                                          This field is required
+                                        </p>
+                                      </span>
+                                    </div>
+                                  </div>
+                                  <div class="form-item">
+                                    <label for="email"> Email <span class="form-required">*</span> </label>
+                                    <div class="table-value email-value table-value-required"> <span class="input-field-wrapper input input-text-email">
+                                     
+                                      <input id="email" [(ngModel)]="email" type="text" formControlName="email"
+                                      (input)="somethingChanged($event.target.value)"
+                                      [ngClass]="{myclass2: shouldShow2, 'form-control':true}" 
+                                       />
+                                      </span>
+                                    
+                                      <span>                                
+                                          <p class="inline-error"  *ngIf="mycss && form.get('email').hasError('required') ">
+                                            This field is required
+                                          </p>
+                                          <p class="inline-error" *ngIf="!form.get('email').hasError('required') && form.get('email').hasError('email')">
+                                            Email is Invalid !
+                                          </p>
+                                       
+                                      </span>
+                                    
+                                    </div>
+                                      
+                                  </div>
+                                  <div class="form-item">
+                                    <label for="subject"> Subject <span class="form-required">*</span> </label>
+                                    <div class="table-value subject-value table-value-required"> <span class="input-field-wrapper input input-text">
+                                      
+                                      <input id="subject" [(ngModel)]="subject" type="text" formControlName="subject"
+                                      (input)="somethingChanged($event.target.value)"
+                                      [ngClass]="{myclass3: shouldShow3,'form-control':true}" 
+
+                                      />
+                                      </span>
+                                      <span>
+                                      <p class="inline-error"  *ngIf="mycss && form.get('subject').hasError('required') ">
+                                          This field is required
+                                        </p>
+                                    
+                                      </span>
+                                    </div>
+                                
+                                  </div>
+                                  <div class="form-item">
+                                    <label for="message" class="for-message"> Your Message <span class="form-required">*</span> </label>
+                                    <div class="resizable-textarea">
+                                      <div class="table-value message-value table-value-required">
+                                        <textarea id="message" [(ngModel)]="message" rows="10" cols="50" formControlName="message"
+                                        (input)="somethingChanged($event.target.value)"
+                                        [ngClass]="{myclass4: shouldShow4,'form-control':true}" 
+                                         ></textarea>
+                                      </div>
+                                      <span>                                
+                                          <p class="inline-error"  *ngIf="mycss && form.get('message').hasError('required') ">
+                                            This field is required
+                                          </p>
+                                        </span>
+                                    </div>
+                                  </div>
+                                  <div class="form-item"> </div>
+                                  <div class="form-action">
+                                    <button type="submit" class="btn regular-button" name="button" (click)="customvalidation()">Send</button>
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                            <div class="contactright">
+                              <div class="store-info address">
+                                <div class="store-info-address">
+                                  <h3 class="alt2">Call our Offices</h3>
+                                  <h2 class="alt2">For UK</h2>
+                                  <div class="phone-num">0191 5800118</div>
+                                  <h2 class="alt2">For Outside UK</h2>
+                                  <div class="phone-num">+44 1915800118</div>
+                                </div>
+                                <div class="store-info-address">
+                                  <h3 class="alt2">Address</h3>
+                                  <p class="address">Angelic Diamonds<br>
+                                    13 Easter Park<br>
+                                    Baker Road<br>
+                                    Cramlington<br>
+                                    Northumberland<br>
+                                    NE23 1WQ<br/>
+                                    United Kngdom</p>
+                                </div>
+                              </div>
+                              <div class="store-info social">
+                                <div class="store-info-address">
+                                  <h3 class="alt2">Office Hours</h3>
+                                  <table class="tbl-gen">
+                                    <tbody>
+                                      <tr>
+                                        <td>Monday</td>
+                                        <td>9:00 AM</td>
+                                        <td>-</td>
+                                        <td>5:30 PM</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Tuesday</td>
+                                        <td>9:00 AM</td>
+                                        <td>-</td>
+                                        <td>5:30 PM</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Wednesday</td>
+                                        <td>9:00 AM</td>
+                                        <td>-</td>
+                                        <td>5:30 PM</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Thursday</td>
+                                        <td>9:00 AM</td>
+                                        <td>-</td>
+                                        <td>5:30 PM</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Friday</td>
+                                        <td>9:00 AM</td>
+                                        <td>-</td>
+                                        <td>5:30 PM</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Saturday</td>
+                                        <td>10:00 AM</td>
+                                        <td>-</td>
+                                        <td>4:30 PM</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Sunday</td>
+                                        <td colspan="2">Closed</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                                <div class="store-info-address">
+                                  <h3 class="alt2">Email</h3>
+                                  <div class="sales-el"><a class="email" href="mailto:support@angelicdiamonds.com">support@angelicdiamonds.com</a></div>
+                                </div>
+                              </div>
+                            </div>
+                            <iframe width="100%" height="588" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=Angelic%20Diamonds%2013%20Easter%20Park%2C%20Baker%20Road%2C%20Cramlington%2C%20Northumberland%2C%20NE23%201WQ%2CUnited%20Kingdom&zoom=8&key=AIzaSyALOI7t0jA3vOAfXJBmkPMPeIHOQZKk6Cs" allowfullscreen></iframe>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+        
+          </div> 
+          </div>      
+          <app-footer></app-footer>
+        </div>
+      </div>
+    </div>

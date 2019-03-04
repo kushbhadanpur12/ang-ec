@@ -1,0 +1,40 @@
+.gotomore, .gotomore:hover{
+	    font-style: inherit;
+}
+
+.proList .wrap ul li h2{
+	padding-bottom: 16px;
+    margin-top: 2px;
+}
+.proList .wrap {
+    margin-bottom: 0px;
+}
+
+@media(max-width: 767px){
+	.mobileslider img.homeBanner{
+		width: 100%;
+	}
+	.discoverourcol{
+		margin: 3px 0 10px;
+	}
+	.proList .wrap ul li h2{
+		padding-bottom: 15px;
+    	margin-top: 0px;
+	}
+	.slick-slide img, .middleCol img, .rightCol img, .customerreviewshome img, .expertadvisehome img{
+		width: 100%;
+	}
+}
+@media(max-width: 667px){
+	.discoverourcol{
+		margin: 11px 0 10px;
+	}
+}
+@media(max-width: 375px){
+	.proList {
+    	margin: 20px 0 0 0;
+	}
+	.discoverourcol{
+		margin:10px 0 -2px;
+	}
+}

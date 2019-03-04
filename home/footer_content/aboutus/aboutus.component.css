@@ -1,0 +1,9 @@
+p, .about_para, .showroom_para {
+    font-weight: 300 !important;
+    font-size: 13.5px!important;
+    text-align: center;
+    letter-spacing: 0.5px;
+    margin-bottom: 7px;
+    line-height: 19px;
+    color: #1e1e1e!important;
+}

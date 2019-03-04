@@ -1,0 +1,238 @@
+<div style="position: fixed;top: 13px;left: 31%;">
+<div style="text-align:center">
+     <p *ngIf="sentmsg"> <span class="success-style"> Thank you <b>{{subscribermail}}</b>, you have successfully subscibed to our newsletter. </span></p>
+  <p *ngIf="alreadyexist"><span class="error-style"> This <b>{{subscribermail}}</b> email is already in our database.</span></p>
+  <p class="inline-error" *ngIf="mycss && form.get('email').hasError('required') ">
+      <span class="error-style"> Please enter your E-mail! 
+       </span></p>
+         
+   </div>
+</div>
+
+<footer>
+  <div class="wrap clearfix">
+    <div class="row-01 desktop clearfix">
+      <div class="col one">
+        <h2>About</h2>
+        <ul>
+          <li><a routerLink="/about-us.html">About Us</a></li>
+          <li><a routerLink="/contactus.html">Contact Us </a></li>
+          <li><a routerLink="/our-showroom.html" >Our Showroom</a></li>
+          <li><a routerLink="/terms-and-conditions.html" >Terms and Conditions</a></li>
+          <li><a routerLink="/privacy-and-cookies.html">Privacy and Cookies</a></li>
+        </ul>
+      </div>
+      <div class="col two">
+        <h2>Information</h2>
+        <ul>
+          <li><a routerLink="/education-guide.html">Education Guide</a></li>
+          <li><a routerLink="/luxury-packaging.html">Luxury Packaging</a></li>
+          <li><a routerLink="/ring-size-guide.html">Ring Size Guide</a></li>
+          <li><a routerLink="/ring-resizing.html">Ring Resizing </a></li>
+          <li><a routerLink="/diamond-size-guide.html">Diamond Size Guide </a></li>
+          <li><a routerLink="/insurance-valuation.html">Insurance Valuation </a></li>
+          <li><a routerLink="/faq-s.html">FAQ`s </a></li>
+        </ul>
+      </div>
+      <div class="col three">
+        <h2>Customer Care</h2>
+        <ul>
+          <li><a routerLink="/bespoke-design.html">Bespoke Design</a></li>
+          <li><a routerLink="/finance.html">Finance</a></li>
+          <li><a routerLink="/returns-policy.html">Returns Policy</a></li>
+          <li><a routerLink="/delivery-information.html">Delivery Information</a></li>
+          <li><a routerLink="/price-match-promise.html">Price Match Promise</a></li>
+          <li><a routerLink="/warranty.html">Warranty</a></li>
+        </ul>
+      </div>
+      <div class="col four">
+        <h2>Website</h2>
+        <ul>
+          <li *ngIf="!isLoggedin()"><a (click)="glaballogin = !glaballogin"  class="log-in">Account Login</a></li>
+          <li *ngIf="isLoggedin()"><a (click)="logout()">Logout</a></li>
+          <li><a href="?target=map">Sitemap</a></li>
+          <li><a href="?target=sitemap">XML Sitemap</a></li>
+          <li><a href="https://www.reviews.co.uk/company-reviews/store/angelic-diamonds" target="_blank">Customer Reviews</a></li>
+          <li><a href="https://www.angelicdiamonds.com/blog/">Blog</a></li>
+        </ul>
+      </div>
+    
+      <div class="col six">
+        <div class="newsletter">
+          <h3>Sign up to our newsletter</h3>       
+          <div class="fieldRow">
+               
+           
+            <form [formGroup]="form" (ngSubmit)="sendMail(form)">
+              
+              <div class="LucidNewsSubscriber">
+                <div class="table-value newsemail-value">
+                  <span class="input-field-wrapper input input-text-email">
+                  
+                    <input id="newsemail" [(ngModel)]="newsemail" placeholder="Email address" type="text" formControlName="email"
+                   
+                     />
+                  </span>
+                  <span>                                
+                    
+                    <p class="inline-error" *ngIf="!form.get('email').hasError('required') && (form.get('email').hasError('email') || form.get('email').hasError('pattern'))">
+                      Invalid Email Address 
+                    </p>
+                 
+                </span>
+                </div>
+                <button type="submit" class="btn  regular-button main submit" name="submit">
+                
+                  <span>sign up</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row-01 mobile clearfix">
+      <div class="col one">
+        <h2 id="ftmenu1" onClick="toogleftmenu(this.id);">About <span class='plusminusfooter'><img src="assets/images_theme/arrow-down.png"  alt="arrow"></span></h2>
+        <ul>
+          <li><a routerLink="/">Contact Us </a></li>
+          <li><a routerLink="/our-showroom.html">Our Showroom</a></li>
+          <li><a routerLink="/terms-and-conditions.html">Terms and Conditions</a></li>
+          <li><a routerLink="/privacy-and-cookies.html">Privacy and Cookies</a></li>
+        </ul>
+      </div>
+      <div class="col two">
+        <h2 id="ftmenu2" onClick="toogleftmenu(this.id);">Information <span class='plusminusfooter'><img src="assets/images_theme/arrow-down.png"  alt="arrow"></span></h2>
+        <ul>
+          <li><a routerLink="/education-guide.html" routerLinkActive="active">Education Guide</a></li>
+          <li><a routerLink="/luxury-packaging.html"  routerLinkActive="active">Luxury Packaging</a></li>
+          <li><a routerLink="/ring-size-guide.html"  routerLinkActive="active">Ring Size Guide</a></li>
+          <li><a routerLink="/ring-resizing.html">Ring Resizing </a></li>
+          <li><a routerLink="/diamond-size-guide.html">Diamond Size Guide </a></li>
+          <li><a routerLink="/insurance-valuation.html">Insurance Valuation </a></li>
+          <li><a routerLink="/faq-s.html">FAQ`s </a></li>
+        </ul>
+      </div>
+      <div class="col three">
+        <h2 id="ftmenu3" onClick="toogleftmenu(this.id);">Customer Care <span class='plusminusfooter'><img src="assets/images_theme/arrow-down.png"  alt="arrow"></span></h2>
+        <ul>
+          <li><a routerLink="/bespoke-design.html">Bespoke Design</a></li>
+          <li><a routerLink="/finance.html">Finance</a></li>
+          <li><a routerLink="/returns-policy.html">Returns Policy</a></li>
+          <li><a routerLink="/delivery-information.html">Delivery Information</a></li>
+          <li><a routerLink="/price-match-promise.html">Price Match Promise</a></li>
+          <li><a routerLink="/warranty.html">Warranty</a></li>
+        </ul>
+      </div>
+      <div class="col four">
+        <h2 id="ftmenu4" onClick="toogleftmenu(this.id);">Website <span class='plusminusfooter'><img src="assets/images_theme/arrow-down.png"  alt="arrow"></span></h2>
+        <ul>
+          <li *ngIf="!isLoggedin()"><a (click)="glaballogin = !glaballogin"  class="log-in">Account Login</a></li>
+          <li *ngIf="isLoggedin()"><a (click)="logout()">Logout</a></li>
+          <li><a>Sitemap</a></li>
+          <li><a >XML Sitemap</a></li>
+          <li><a target="_blank">Customer Reviews</a></li>
+          <li><a href="https://www.angelicdiamonds.com/blog/">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footerbtm">
+    <div class="footersecure">
+      <div class="footersecureinner wrap clearfix">
+        <div class="payment">
+          <ul> 
+            <li class="cq-soc-faded safebuy"><span class="safebuyimg"></span></li>
+            <li class="cq-soc-faded stopblooddiamonds"><span class="stopblooddiamondsimg"></span></li>
+            <li class="cq-soc-faded edinburghsssaysoffice"><a href="https://www.assayassured.co.uk/crt/b51bbbec-2f1a-11e6-a1cc-001999b0ee30" target="_blank"><span class="edinburghsssaysofficeimg"></span></a></li>
+            <li class="cq-soc-faded britishjewellersassociation"><a href="http://www.naj.co.uk/en/member-services/member-search.cfm/angelic_diamonds" target="_blank"><span class="britishjewellersassociationimg"></span></a></li>        
+            <li class="cq-soc-faded reviews"><a href="https://www.reviews.co.uk/company-reviews/store/angelic-diamonds" target="_blank"><span class="reviewsimg"></span></a></li>
+            <li class="cq-soc-faded comodo"><span class="comodoimg"></span></li> 
+          </ul>
+        </div>      
+        <div class="paymentMob">
+          <ul> 
+            <li class="cq-soc-faded safebuy"><span class="safebuyimg"></span></li>
+            <li class="cq-soc-faded stopblooddiamonds"><span class="stopblooddiamondsimg"></span></li>
+            <li class="cq-soc-faded edinburghsssaysoffice"><a href="https://www.assayassured.co.uk/crt/b51bbbec-2f1a-11e6-a1cc-001999b0ee30" target="_blank"><span class="edinburghsssaysofficeimg"></span></a></li>
+            <li class="cq-soc-faded britishjewellersassociation"><a href="http://www.naj.co.uk/en/member-services/member-search.cfm/angelic_diamonds" target="_blank"><span class="britishjewellersassociationimg"></span></a></li>        
+            <li class="cq-soc-faded reviews"><a href="https://www.reviews.co.uk/company-reviews/store/angelic-diamonds" target="_blank"><span class="reviewsimg"></span></a></li>
+            <li class="cq-soc-faded comodo"><span class="comodoimg"></span></li> 
+          </ul>
+        </div>
+      </div>
+    </div>
+    <section class="cq-footer-social fn_sc_e48 mobile"> 
+      <ul class="mobilesocial"> 
+        <li class="cq-soc-ig"><a href="https://www.instagram.com/angelicdiamonds/" target="_blank" class="tooltip-trigger"><img src="assets/images_theme/instagram.png"  alt="ig"></a></li> 
+        <li class="cq-soc-fb"><a href="https://www.facebook.com/angelicdiamonds/" target="_blank" class="tooltip-trigger"><img src="assets/images_theme/facebook.png"  alt="fb"> </a> </li> 
+        <li class="cq-soc-ggl"><a href="https://plus.google.com/105418643120459485757" target="_blank" class="tooltip-trigger"><img src="assets/images_theme/google.png"  alt="ggl"></a></li> 
+        <li class="cq-soc-tw"><a href="https://twitter.com/AngelicDiamonds" target="_blank" class="tooltip-trigger"><img src="assets/images_theme/twitter.png"  alt="tw"></a></li> 
+        <li class="cq-soc-pin"><a href="https://uk.pinterest.com/angelicdiamonds/" target="_blank" class="tooltip-trigger"><img src="assets/images_theme/pinterest.png"  alt="pin"></a></li> 
+      </ul>
+
+    </section>
+    <div class="footercopyright">
+      <div class="footercopyrightinner wrap clearfix">
+        <section class="cq-footer-legal desktop">
+          <div class="cq-col1"> 
+            <address>
+              <div itemscope itemtype="http://schema.org/LocalBusiness">
+                <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                  <span itemprop="name">Angelic Diamonds</span>
+                  <span itemprop="streetAddress">13 Easter Park, Baker Road</span>,
+                  <span itemprop="addressLocality">Cramlington</span>,
+                  <span itemprop="addressRegion">Northumberland</span>,
+                  <span itemprop="postalCode">NE23 1WQ</span>
+                </div>
+                <meta itemprop="latitude" content="55.095895" >
+                <meta itemprop="longitude" content="-1.610684" >
+              </div> 
+              <p class="cq-legal-address">Angelic Diamonds is the trading brand of ADJ Retail Ltd.<br/>Company No: 9949321 VAT Registration No: 236884079.</p>
+            </address> 
+          </div>
+          <div class="footerpaymentlogos"><img src="assets/images_theme/payments.jpg"  alt="Payment Logos" /></div>
+
+        </section>
+        <section class="cq-footer-legal mobile">
+          <div class="cq-col1"> 
+            <address>
+              <div itemscope itemtype="http://schema.org/LocalBusiness">
+                <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                  <span itemprop="name">Angelic Diamonds</span><br/>
+                  <span itemprop="streetAddress">13 Easter Park,</span><br/>
+                  <span itemprop="streetAddress name">Baker Road,</span><br/>
+                  <span itemprop="addressLocality">Cramlington,</span><br/>
+                  <span itemprop="addressRegion">Northumberland</span>
+                  <span itemprop="postalCode">NE23 1WQ</span>
+                </div>
+                <meta itemprop="latitude" content="55.095895" >
+                <meta itemprop="longitude" content="-1.610684" >
+              </div> 
+              <p class="cq-legal-address">Angelic Diamonds is the trading brand of ADJ Retail Ltd.<br/>Company No: 9949321 VAT Registration No: 236884079.</p>
+            </address> 
+          </div>
+          <div class="footerpaymentlogos"><img src="assets/images_theme/payments.jpg"  alt="Payment Logos" /></div>
+
+         </section>
+      </div>
+    </div>
+
+  </div>
+</footer>   
+
+<app-globallogin [(visible)]="glaballogin"></app-globallogin>
+<script type="text/javascript">
+  function toogleftmenu(id){
+    //alert(id);
+    var id = "#"+id;
+
+    if (jQuery(id).next("ul").is(':visible')) {
+      jQuery(id).next("ul").slideUp(50);
+      jQuery(id).children(".plusminusfooter").html('<img src="assets/images_theme/arrow-down.png"  alt="arrow">');
+    } else {
+      jQuery(id).next("ul").slideDown(50);
+      jQuery(id).children(".plusminusfooter").html('<img src="assets/images_theme/arrow-up.png"  alt="arrow">');
+    }
+  }
+</script>

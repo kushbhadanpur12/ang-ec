@@ -1,0 +1,773 @@
+
+<body class="">
+<div id="page-container">
+  <div id="page-container2" class="">
+    <div id="wrapper">
+      <app-mobilemenu></app-mobilemenu>
+      <div id="desktopheader">
+        <app-header></app-header>
+        <app-menu></app-menu>
+      </div>
+      <div id="main-wrapper">
+        <div id="main" class="clearfix">
+          <div class="wrap clearfix page-category">
+            <div class="clear"></div>
+            <div id="content" class="column">
+              <div class="section"> <a id="main-content"></a>
+                <div class="list-container" data-group="center">
+                  <div class="checkout_fastlane_container">
+                    <div class="checkout_fastlane_header">
+                      <div class="checkout_fastlane_header-left">
+                        <h1 class="title" id="page-title">Checkout</h1>
+                        <div class="checkoutlogin clearfix">
+                          <!-- *ngIf="userloggedin; -->
+                          <div *ngIf="isLoggedin()" class="alreadyaccount" > {{ cemail }} is logged in ! <a >
+                            <button type="button" class="btn  regular-button loggedin-btn" (click)="logout()"><span>LOG OUT </span></button>
+                            </a> </div>
+                          <div *ngIf="!isLoggedin()" class="alreadyaccount">Already have an Angelic Diamonds account? <a>
+                            <button type="button" class="btn  regular-button loggedin-btn" (click)="glaballogin = !glaballogin"><span>Log in </span></button>
+                            </a> </div>
+                        </div>
+                        <div style="clear:both"></div>
+                      </div>
+                      <div class="checkout_fastlane_header-right">
+                        <div class="checkout_fastlane_navigation">
+                          <h2></h2>
+                          <ul class="chkout">
+                            <li (click)="select_addr();">1. Address</li>
+                            <li (click)="select_ship();">2. Shipping</li>
+                            <li (click)="select_pay();">3. Payment</li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+                    <!-- Address-->
+                    <div class="cartLoader">
+                      <div class="loadergif"></div>
+                    </div>
+                    <div *ngIf="showaddress_isTrue">
+                      <div *ngIf="showaddress">
+                        <div class="checkout_fastlane_sections section-address">
+                          <div class="checkout_fastlane_section_wrapper">
+                            <div class="tabbed-content-wrapper js-tabs">
+                              <div class="tabs-container">
+                                <div class="tab-content">
+                                  <div role="tabpanel" class="tab-pane active " id="address">
+                                    <div class="checkout_fastlane_section checkout_fastlane_section--address">
+                                      <h1 class="checkout_fastlane_section_heading">Address</h1>
+                                      <div class="checkout_fastlane_section-left">
+                                        <div class="checkout_fastlane_address_forms">
+                                          <div class="checkout_fastlane_address_form_wrapper">
+                                            <h3 class="checkout_fastlane_block_heading" style=" width: 100%;">Billing address </h3>
+                                            <div class="paybycardtxt"> If paying by card this must match your card address </div>
+                                            <div *ngIf="hideaddrbook && custaddr.length > 0" class="checkout_fastlane_block_address-book-button "> <a (click)="addressbook = !addressbook" class="popup-button address-book-button" style="cursor:pointer"> Address book </a> </div>
+                                            <div class="checkout_fastlane_address_form checkout_fastlane_address_form--shipping">
+                                              <form id="add_people_form" novalidate>
+                                                <ul class="form ">
+                                                  <li>
+                                                    <input type="hidden" name="user_id" id="current_user_id" value="" >
+                                                  </li>
+                                                  <li>
+                                                    <input type="hidden" name="cust_addr_book_billing_id" id="cust_addr_book_billing_id" value="{{ billingData?.id }}" >
+                                                  </li>
+                                                  <li class="item-firstname  clearfix form-group">
+                                                    <div class="table-label shippingaddress-firstname-label table-label-required">
+                                                      <label for="shippingaddress-firstname"> First name </label>
+                                                    </div>
+                                                    <div class="star"> * </div>
+                                                    <div class="table-value shippingaddress-firstname-value table-value-required"> <span class="input-field-wrapper b-firstname">
+                                                      <input class="billAdd_firstname field-firstname form-control chkout_error" maxlength="length" id="shippingaddress-firstname" name="billAdd_firstname" type="text" value="{{ billingData?.fname }}" >
+                                                      </span> </div>
+                                                    <div class="clear"></div>
+                                                  </li>
+                                                  <li class="item-lastname  clearfix form-group">
+                                                    <div class="table-label shippingaddress-lastname-label table-label-required">
+                                                      <label for="shippingaddress-lastname"> Last name </label>
+                                                    </div>
+                                                    <div class="star"> * </div>
+                                                    <div class="table-value shippingaddress-lastname-value table-value-required"> <span class="input-field-wrapper address-lastname">
+                                                      <input class="billAdd_lastname field-lastname chkout_error form-control" name="billAdd_lastname" type="text" value="{{ billingData?.lname }}">
+                                                      </span> </div>
+                                                    <div class="clear"></div>
+                                                  </li>
+                                                  <li class="item-street  clearfix form-group">
+                                                    <div class="table-label shippingaddress-street-label table-label-required">
+                                                      <label for="shippingaddress-street"> Address </label>
+                                                    </div>
+                                                    <div class="star"> * </div>
+                                                    <div class="table-value shippingaddress-street-value table-value-required"> <span class="input-field-wrapper address-street">
+                                                      <input class="billAdd_address1 field-street chkout_error form-control craftic_addr1" id="craftic_addr1" name="billAdd_address1" type="text"  placeholder="Start Typing Postcode or Street" value="{{ billingData?.addr1 }}" autocomplete="off">
+                                                      </span> </div>
+                                                    <div class="clear"></div>
+                                                  </li>
+                                                  <li class="item-address_line2  clearfix form-group">
+                                                    <div class="table-label shippingaddress-address-line2-label">
+                                                      <label for="shippingaddress-address-line2"> Address (line 2) </label>
+                                                    </div>
+                                                    <div class="star"> &nbsp; </div>
+                                                    <div class="table-value shippingaddress-address-line2-value"> <span class="input-field-wrapper address-address_line2">
+                                                      <input class="billAdd_address2 chkout_error form-control craftic_addr2" id="craftic_addr2" name="billAdd_address2" type="text" value="{{ billingData?.addr2 }}" >
+                                                      </span> </div>
+                                                    <div class="clear"></div>
+                                                  </li>
+                                                  <li class="item-city  clearfix form-group">
+                                                    <div class="table-label shippingaddress-city-label table-label-required">
+                                                      <label for="shippingaddress-city"> City </label>
+                                                    </div>
+                                                    <div class="star"> * </div>
+                                                    <div class="table-value shippingaddress-city-value table-value-required"> <span class="input-field-wrapper address-city">
+                                                      <input class="billAdd_city field-city chkout_error form-control craftic_city" id="craftic_city" name="billAdd_city" type="text" value="{{ billingData?.city }}" >
+                                                      </span> </div>
+                                                    <div class="clear"></div>
+                                                  </li>
+                                                  <li class="item-zipcode  clearfix form-group">
+                                                    <div class="table-label shippingaddress-zipcode-label table-label-required">
+                                                      <label for="shippingaddress-zipcode"> Post code </label>
+                                                    </div>
+                                                    <div class="star"> * </div>
+                                                    <div class="table-value shippingaddress-zipcode-value table-value-required"> <span class="input-field-wrapper address-zipcode">
+                                                      <input class="billAdd_postcode field-zipcode chkout_error form-control craftic_postcode" id="craftic_postcode"  name="billAdd_postcode" type="text"  value="{{ billingData?.post_code }}">
+                                                      </span> </div>
+                                                    <div class="clear"></div>
+                                                  </li>
+                                                  <li class="item-country_code  clearfix form-group">
+                                                    <div class="table-label shippingaddress-country-code-label table-label-required">
+                                                      <label for="shippingaddress-country-code"> Country </label>
+                                                    </div>
+                                                    <div class="star"> * </div>
+                                                    <div class="table-value shippingaddress-country-code-value table-value-required country-selector"> <span class="input-field-wrapper address-country_code">
+                                                      <select class="billAdd_country field-country_code chkout_error form-control" [(ngModel)]="billAdd_countrycode" name="billAdd_countrycode" >
+                                                        <option value="0">Select one...</option>
+                                                        <option *ngFor="let country of  country[0]" value="{{ country.id }}">{{ country.code }}</option>
+                                                      </select>
+                                                      </span> </div>
+                                                    <div class="clear"></div>
+                                                  </li>
+                                                  <li class="item-phone  clearfix form-group">
+                                                    <div class="table-label shippingaddress-phone-label table-label-required">
+                                                      <label for="shippingaddress-phone"> Phone </label>
+                                                    </div>
+                                                    <div class="star"> * </div>
+                                                    <div class="table-value shippingaddress-phone-value table-value-required"> <span class="input-field-wrapper address-phone">
+                                                      <input class="billAdd_phone field-phone chkout_error form-control" name="billAdd_phone" type="text"  value="{{ billingData?.phone }}">
+                                                      </span> </div>
+                                                    <div class="clear"></div>
+                                                  </li>
+                                                  <li class="item-email  clearfix form-group">
+                                                    <div class="table-label email-label table-label-required">
+                                                      <label for="email"> Email </label>
+                                                    </div>
+                                                    <div class="star"> * </div>
+                                                    <div class="table-value email-value table-value-required"> <span class="input-field-wrapper address-email">
+                                                    
+                                                      <input class="billAdd_email progress-mark-owner chkout_error form-control" id="billAdd_email" name="billAdd_email" type="text" (blur)="onBlurMethod($event);" value="{{ billAddr_email}}" [(ngModel)]="billAddr_email">
+                                                      </span>
+                                                      <div class="form-field-comment email-comment">
+                                                        <div *ngIf="signin==1 && nopass==0" class="subbox subnote create-warning" style="display: inline-block;cursor:pointer">
+                                                          <p *ngIf="!isLoggedin()"> The email you provided is already in use. You can continue as guest or <a class="sign-in log-in" (click)="glaballogin = !glaballogin">Sign in</a> </p>
+                                                        </div>
+                                                        <p *ngIf="signin==0 && nopass==0 && validemail==1"> Your order details will be sent to your email address </p>
+                                                      </div>
+                                                    </div>
+                                                    <div class="clear"></div>
+                                                  </li>
+                                                  <li *ngIf="signin==0 && nopass==1">
+                                                    <!--<input type="checkbox" name="lateraccount" class="lateraccount"  (click)="display_password();" >  Create an account for later use-->
+                                                    <input  type="checkbox" name="lateraccount"  [(ngModel)]="lateraccount" (click)="display_password();" class="lateraccount">
+                                                    Create an account for later use </li>
+
+                                                  <li *ngIf="chkd_password" class="item-password clearfix form-group">
+                                                    <div class="table-label password-label table-label-required">
+                                                      <label for="password"> Password </label>
+                                                    </div>
+                                                    <div class="star"> * </div>
+                                                    <div class="table-value password-value table-value-required"> <span class="input-field-wrapper password">
+                                                      <input class=" chkout_error billing_password form-control password-visible" name="billing_password" type="password" [(ngModel)]="billing_password" >
+                                                      </span> </div>
+                                                    <div class="clear"></div>
+                                                  </li>
+                                                </ul>
+                                              </form>
+                                            </div>
+                                          </div>
+                                          <div class="checkout_fastlane_address_form_wrapper">
+                                            <h3 class="checkout_fastlane_block_heading" style="width: 100%;">Shipping address</h3>
+                                            <div *ngIf="hideaddrbook" class="checkout_fastlane_block_address-book-button "> <a  *ngIf="sameasbilling==0 && custaddr.length > 0" (click)="shipaddressbook = !shipaddressbook" class="popup-button address-book-button" style="width: 100%;padding: 10px 0px; cursor:pointer"> Address book </a> </div>
+                                            <div class="checkout_fastlane_address_form checkout_fastlane_address_form--billing">
+                                              <form action="/" id="secondfrm" novalidate>
+                                                <div class="checkout_fastlane_block_same_address ">
+                                                  <div class="checkbox">
+                                                    <label>
+                                                    <input  type="checkbox" (click)="sameAddress();" [checked]="(sameasbilling==1)?true:false" value="1" id="sameasbillingcheck" class="same_address" >
+                                                    The same as billing </label>
+                                                  </div>
+                                                  <p class="help-text">Enable this if you would like us to use your billing address as your shipping address</p>
+                                                </div>
+                                                <ul class="form" *ngIf="sameasbilling==0">
+                                                  <li>
+                                                    <input type="hidden" name="cust_addr_book_shipping_id" id="cust_addr_book_shipping_id" value="{{ shipingData?.id }}" >
+                                                  </li>
+                                                  <li class="item-firstname  clearfix form-group">
+                                                    <div class="table-label billingaddress-firstname-label table-label-required">
+                                                      <label for="billingaddress-firstname"> First name </label>
+                                                    </div>
+                                                    <div class="star"> * </div>
+                                                    <div class="table-value billingaddress-firstname-value table-value-required"> <span class="input-field-wrapper address-firstname">
+                                                      <input class="shipAdd_firstname field-firstname chkout_error form-control" name="shipAdd_firstname" type="text"  value="{{ shipingData?.fname }}">
+                                                      </span> </div>
+                                                    <div class="clear"></div>
+                                                  </li>
+                                                  <li class="item-lastname  clearfix form-group">
+                                                    <div class="table-label billingaddress-lastname-label table-label-required">
+                                                      <label for="billingaddress-lastname"> Last name </label>
+                                                    </div>
+                                                    <div class="star"> * </div>
+                                                    <div class="table-value billingaddress-lastname-value table-value-required"> <span class="input-field-wrapper address-lastname">
+                                                      <input class="shipAdd_lastname field-lastname chkout_error form-control" name="shipAdd_lastname" type="text"  value="{{ shipingData?.lname }}">
+                                                      </span> </div>
+                                                    <div class="clear"></div>
+                                                  </li>
+                                                  <li class="item-street  clearfix form-group">
+                                                    <div class="table-label billingaddress-street-label table-label-required">
+                                                      <label for="billingaddress-street"> Address </label>
+                                                    </div>
+                                                    <div class="star"> * </div>
+                                                    <div class="table-value billingaddress-street-value table-value-required"> <span class="input-field-wrapper address-street">
+                                                      <input class="shipAdd_address1 field-street chkout_error validate form-control craft_ship_addr1" name="shipAdd_address1" id="craft_ship_addr1" type="text" placeholder=""  value="{{ shipingData?.addr1 }}" autocomplete="off">
+                                                      </span> </div>
+                                                    <div class="clear"></div>
+                                                  </li>
+                                                  <li class="item-address_line2  clearfix form-group">
+                                                    <div class="table-label billingaddress-address-line2-label">
+                                                      <label for="billingaddress-address-line2"> Address (line 2) </label>
+                                                    </div>
+                                                    <div class="star"> &nbsp; </div>
+                                                    <div class="table-value billingaddress-address-line2-value"> <span class="input-field-wrapper address-address_line2">
+                                                      <input class="shipAdd_address2 chkout_error form-control craft_ship_addr2" name="shipAdd_address2" id="craft_ship_addr2" type="text"  value="{{ shipingData?.addr2 }}">
+                                                      </span> </div>
+                                                    <div class="clear"></div>
+                                                  </li>
+                                                  <li class="item-city  clearfix form-group">
+                                                    <div class="table-label billingaddress-city-label table-label-required">
+                                                      <label for="billingaddress-city"> City </label>
+                                                    </div>
+                                                    <div class="star"> * </div>
+                                                    <div class="table-value billingaddress-city-value table-value-required"> <span class="input-field-wrapper address-city">
+                                                      <input class="shipAdd_city field-city chkout_error form-control craft_ship_city" name="shipAdd_city" id="craft_ship_city" type="text"  value="{{ shipingData?.city }}">
+                                                      </span> </div>
+                                                    <div class="clear"></div>
+                                                  </li>
+                                                  <li class="item-zipcode  clearfix form-group">
+                                                    <div class="table-label billingaddress-zipcode-label table-label-required">
+                                                      <label for="billingaddress-zipcode"> Post code </label>
+                                                    </div>
+                                                    <div class="star"> * </div>
+                                                    <div class="table-value billingaddress-zipcode-value table-value-required"> <span class="input-field-wrapper address-zipcode">
+                                                      <input class="shipAdd_postcode field-zipcode chkout_error validate form-control craft_ship_pincode" name="shipAdd_postcode"  id="craft_ship_pincode" type="text"  value="{{ shipingData?.post_code }}">
+                                                      </span> </div>
+                                                    <div class="clear"></div>
+                                                  </li>
+                                                  <li class="item-country_code  clearfix form-group">
+                                                    <div class="table-label billingaddress-country-code-label table-label-required">
+                                                      <label for="billingaddress-country-code"> Country </label>
+                                                    </div>
+                                                    <div class="star"> * </div>
+                                                    <div class="table-value billingaddress-country-code-value table-value-required country-selector"> <span class="input-field-wrapper address-country_code">
+                                                      <select class="shipAdd_country field-country_code chkout_error form-control" [(ngModel)]="shipAdd_countrycode" name="shipAdd_country" (change)="country_id($event.target.value);">
+                                                        <option value="0">Select one...</option>
+                                                        <option *ngFor="let country of  country[0]" value="{{ country.id }}">{{ country.code }}</option>
+                                                      </select>
+                                                      </span> </div>
+                                                    <div class="clear"></div>
+                                                  </li>
+                                                  <li class="item-phone  clearfix form-group">
+                                                    <div class="table-label billingaddress-phone-label table-label-required">
+                                                      <label for="billingaddress-phone"> Phone </label>
+                                                    </div>
+                                                    <div class="star"> * </div>
+                                                    <div class="table-value billingaddress-phone-value table-value-required"> <span class="input-field-wrapper address-phone">
+                                                      <input class="shipAdd_phone field-phone chkout_error form-control"  name="shipAdd_phone" type="text"  value="{{ shipingData?.phone }}" >
+                                                      </span> </div>
+                                                    <div class="clear"></div>
+                                                  </li>
+                                                </ul>
+                                              </form>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="clearfix"></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="checkout_fastlane_details_wrapper">
+                            <div class="checkout_fastlane_details_box">
+                              <div class="checkout_fastlane_cart" >
+                                <div class="cart-items-wrapper">
+                                  <p class="cart-items-header">Order details</p>
+                                  <div class="items-row clearfix"> <a (click)="show_hide_list();" style="cursor:pointer;">{{ results?.totalCartItems }} items in cart</a> <span class="price"> <span class="surcharge"> <span class="surcharge-cell"><span class="part-prefix">{{ results?.DefaultCurrency.prefix }}</span><span class="part-integer">{{ results?.OrderDetails.total }}</span></span> </span> </span> </div>
+                                  <div *ngIf="showhideorderlist" class="list" >
+                                    <ul>
+                                      <li *ngFor="let res of results?.products;"> <a routerLink="/{{ res.clean_url.cleanURL  }}">{{ res.name }}</a> <span style="float: right;"> × <span class="qty">{{ res.amount }}</span></span> </li>
+                                    </ul>
+                                    <hr>
+                                    <a routerLink="/cart.html" class="cart">View cart</a> </div>
+                                  <div class="total clearfix" id="cart-right">
+                                    <hr>
+                                    <ul *ngIf="results?.OrderDetails?.order_coupon" class="totals">
+                                      <span *ngIf="results?.OrderDetails?.order_coupon.type">
+                                      <li *ngIf="results.OrderDetails?.order_coupon.type=='P'" class="order-modifier DCOUPON-modifier dcoupon-code-modifier"> <strong>Coupon discount:</strong> <span class="value"> <span class="surcharge"> <span class="surcharge-cell"><span class="part-integer">{{cust_currency?.prefix}}{{ ((results?.OrderDetails.total * cust_currency?.rate) * (results.OrderDetails?.order_coupon.value / 100)) | number:'1.1-2' }}</span></span> </span> </span>
+                                        <ul class="discount-coupons-panel">
+                                          <li> <span>{{results.OrderDetails?.order_coupon.code}} ({{results.OrderDetails?.order_coupon.value}} %)</span> <a href="javascript:;" (click)="removeCouponCode(results.OrderDetails?.order_coupon.id)">Remove</a> </li>
+                                        </ul>
+                                      </li>
+                                      <li *ngIf="results.OrderDetails?.order_coupon.type=='F'" class="order-modifier DCOUPON-modifier dcoupon-code-modifier"> <strong>Coupon discount:</strong> <span class="value"> <span class="surcharge"> <span class="surcharge-cell"><span class="part-integer">{{cust_currency?.prefix}}{{results.OrderDetails?.order_coupon.value}} </span></span> </span> </span>
+                                        <ul class="discount-coupons-panel">
+                                          <li> <span>{{results.OrderDetails?.order_coupon.code}}</span> <a href="javascript:;" (click)="removeCouponCode(results.OrderDetails?.order_coupon.id)">Remove</a> </li>
+                                        </ul>
+                                      </li>
+                                      </span>
+                                      <li class="order-modifier SHIPPING-modifier shipping-code-modifier"> <strong>Shipping cost:</strong> <span class="value"> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{cust_currency?.prefix}}0.00</span> </span> </span> </span> </li>
+                                      <li class="order-modifier CDEV.VAT.1-modifier cdev.vat.1-code-modifier"> <strong>VAT:</strong> <span class="value"> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{cust_currency?.prefix}}{{ ((results?.OrderDetails.total - results?.OrderDetails.subtotal) * cust_currency?.rate) | number:'1.1-2' }}</span> </span> </span> </span> </li>
+                                      <li class="subtotal real-charge real-charge-value" *ngIf="results?.OrderDetails.currency_id != results?.OrderDetails.multi_currency_id"> <strong>Total charge:</strong> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{results?.DefaultCurrency.prefix}}{{ results?.OrderDetails.total | number:'1.1-2' }}</span> </span> </span> </li>
+                                      <li class="currencyExNote" *ngIf="results?.OrderDetails.currency_id != results?.OrderDetails.multi_currency_id"> Note: All prices billed in {{results?.DefaultCurrency.code}} ({{results?.DefaultCurrency.prefix}}). Current exchange rate is {{cust_currency?.prefix}}1.00 = {{results?.DefaultCurrency.prefix}}{{ (1 / cust_currency?.rate) | number:'1.1-4' }}. </li>
+                                      <hr>
+                                      <li class="total"> <strong>Grand Total:</strong> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{cust_currency?.prefix}}{{ (results?.OrderDetails.total * cust_currency?.rate) | number:'1.1-2' }}</span> </span> </span> </li>
+                                    </ul>
+                                    <ul *ngIf="!results?.OrderDetails?.order_coupon" class="totals">
+                                      <li class="order-modifier SHIPPING-modifier shipping-code-modifier"> <strong>Shipping cost:</strong> <span class="value"> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{cust_currency?.prefix}}0.00</span> </span> </span> </span> </li>
+                                      <li class="order-modifier CDEV.VAT.1-modifier cdev.vat.1-code-modifier"> <strong>VAT:</strong> <span class="value"> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{cust_currency?.prefix}}{{ ((results?.OrderDetails.total - results?.OrderDetails.subtotal) * cust_currency?.rate) | number:'1.1-2' }}</span> </span> </span> </span> </li>
+                                      <li class="subtotal real-charge real-charge-value" *ngIf="results?.OrderDetails.currency_id != results?.OrderDetails.multi_currency_id"> <strong>Total charge:</strong> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{results?.DefaultCurrency.prefix}}{{ results?.OrderDetails.total | number:'1.1-2' }}</span> </span> </span> </li>
+                                      <li class="currencyExNote" *ngIf="results?.OrderDetails.currency_id != results?.OrderDetails.multi_currency_id"> Note: All prices billed in {{results?.DefaultCurrency.code}} ({{results?.DefaultCurrency.prefix}}). Current exchange rate is {{cust_currency?.prefix}}1.00 = {{results?.DefaultCurrency.prefix}}{{ (1 / cust_currency?.rate) | number:'1.1-4' }}. </li>
+                                      <hr>
+                                      <li class="total"> <strong>Grand Total:</strong> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{cust_currency?.prefix}}{{ (results?.OrderDetails.total * cust_currency?.rate) | number:'1.1-2' }}</span> </span> </span> </li>
+                                    </ul>
+                                  </div>
+                                  <ul class="modifiers included-modifiers">
+                                  </ul>
+                                </div>
+                              </div>
+                              <div class="checkout_fastlane_section-buttons">
+                                <div class="next-button">
+                                  <button type="button" class="btn regular-button regular-main-button checkout_fastlane_section-next" title="Click to proceed to the next step" (click)="chooseShipping();">Choose shipping</button>
+                                </div>
+                              </div>
+                              <div class="coupons clearfix">
+                                <div class="couponInner" >
+                                  <div class="new more"> <a href="javascript:;" (click)="couponCode();"><span>Apply a coupon code</span></a> </div>
+                                  <div class="add-coupon clearfix" style="display:none">
+                                    <form action="/" method="post" accept-charset="utf-8" onSubmit="javascript: return true;" class="use-inline-error">
+                                      <span>Enter your voucher code if you have one.</span>
+                                      <div class="table-value code-value table-value-required"> <span class="input-field-wrapper input input-text">
+                                        <input id="couponcode" name="couponcode" placeholder="Enter code" type="text" value=""
+                                               autocomplete="off" maxlength="16" class="validate[required,maxSize[16]] form-control"
+                                               [ngClass]="{myclass: shouldShow}"
+                                               >
+                                        </span> </div>
+                                      <span>
+                                      <p *ngIf="reqCss" style="color: red;font-weight: 400;"> This field is required </p>
+                                      <p *ngIf="couponInvalid" style="color: red;font-weight: 400;"> Invalid coupon code, please check the spelling: " {{ couponcode }}" </p>
+                                      <p *ngIf="priceRangeInvalid" style="color: red;font-weight: 400;"> This coupon can be applied only to orders with a subtotal amount not exceeding {{ orderamount }} </p>
+                                      <p *ngIf="alreadyused" style="color: red;font-weight: 400;"> The coupon has already been used </p>
+                                      </span>
+                                      <button type="submit" class="btn regular-button submit add-coupon visible" style="display: none;" (click)="submitCouponCode()"><span>Apply Coupon</span></button>
+                                    </form>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="clearfix"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- End Address-->
+
+                    <!-- Shipping  -->
+                    <div *ngIf="showaddress_isTrue && showshipping_isTrue">
+                      <div *ngIf="showshipping">
+                        <div style="width:100%;display: inline-flex;">
+                          <div style="width:50%">
+                            <div id="shipping-methods-list" data-deferred="true">
+                              <div class="radiolist-view">
+                                <ul class="shipping-rates">
+                                  <li class="shipping-rate" *ngFor="let shippings of ship_methods; let i = index">
+                                    <div class="radio">
+                                        <label title="{{ shippings.name }}">
+                                        <input type="radio" id="method{{ shippings.id }}" name="shipping_method_name" (change)="getShippingValue(shippings.id,shippings.name)" value="{{ shippings.id }}" class="shipping_method_name" attr.methonam="{{ shippings.name }}" [checked]="(defaultshipid==shippings.id) ? true : false" />
+                                        <span class="rate-title">{{ shippings.name }}</span> </label>
+                                      </div>
+                                  </li>
+                                </ul>
+                                
+                              </div>
+                            </div>
+                            <div class="checkout_fastlane_order_note">
+                              <label for="order_note" class="order_note">Customer Note:</label>
+                              <textarea class="form-control" rows="3" name="notes" id="order_note" placeholder="" (blur)="customer_note($event);">{{notesData}}</textarea>
+                            </div>
+                          </div>
+                          <div style="width:50%">
+                            <div class="checkout_fastlane_details_wrapper">
+                              <div class="checkout_fastlane_details_box">
+                                <div class="checkout_fastlane_cart" >
+                                  <div class="cart-items-wrapper">
+                                    <p class="cart-items-header">Order details</p>
+                                    <div class="items-row clearfix"> <a (click)="show_hide_list();" style="cursor:pointer;">{{ results?.totalCartItems }} items in cart</a> <span class="price"> <span class="surcharge"> <span class="surcharge-cell"><span class="part-prefix">{{ results?.DefaultCurrency.prefix }}</span><span class="part-integer">{{ results?.OrderDetails.total }}</span></span> </span> </span> </div>
+                                    <div *ngIf="showhideorderlist" class="list" >
+                                      <ul>
+                                        <li *ngFor="let res of results?.products;"> <a routerLink="/{{ res.clean_url.cleanURL  }}">{{ res.name }}</a> <span style="float: right;"> × <span class="qty">{{ res.amount }}</span></span> </li>
+                                      </ul>
+                                      <hr>
+                                      <a routerLink="/cart.html" class="cart">View cart</a> </div>
+                                  <div class="total clearfix" id="cart-right">
+                                    <hr>
+                                    <ul *ngIf="results?.OrderDetails?.order_coupon" class="totals">
+                                      <span *ngIf="results?.OrderDetails?.order_coupon.type">
+                                      <li *ngIf="results.OrderDetails?.order_coupon.type=='P'" class="order-modifier DCOUPON-modifier dcoupon-code-modifier"> <strong>Coupon discount:</strong> <span class="value"> <span class="surcharge"> <span class="surcharge-cell"><span class="part-integer">{{cust_currency?.prefix}}{{ ((results?.OrderDetails.total * cust_currency?.rate) * (results.OrderDetails?.order_coupon.value / 100)) | number:'1.1-2' }}</span></span> </span> </span>
+                                        <ul class="discount-coupons-panel">
+                                          <li> <span>{{results.OrderDetails?.order_coupon.code}} ({{results.OrderDetails?.order_coupon.value}} %)</span> <a href="javascript:;" (click)="removeCouponCode(results.OrderDetails?.order_coupon.id)">Remove</a> </li>
+                                        </ul>
+                                      </li>
+                                      <li *ngIf="results.OrderDetails?.order_coupon.type=='F'" class="order-modifier DCOUPON-modifier dcoupon-code-modifier"> <strong>Coupon discount:</strong> <span class="value"> <span class="surcharge"> <span class="surcharge-cell"><span class="part-integer">{{cust_currency?.prefix}}{{results.OrderDetails?.order_coupon.value}} </span></span> </span> </span>
+                                        <ul class="discount-coupons-panel">
+                                          <li> <span>{{results.OrderDetails?.order_coupon.code}}</span> <a href="javascript:;" (click)="removeCouponCode(results.OrderDetails?.order_coupon.id)">Remove</a> </li>
+                                        </ul>
+                                      </li>
+                                      </span>
+                                      <li class="order-modifier SHIPPING-modifier shipping-code-modifier"> <strong>Shipping cost:</strong> <span class="value"> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{cust_currency?.prefix}}0.00</span> </span> </span> </span> </li>
+                                      <li class="order-modifier CDEV.VAT.1-modifier cdev.vat.1-code-modifier"> <strong>VAT:</strong> <span class="value"> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{cust_currency?.prefix}}{{ ((results?.OrderDetails.total - results?.OrderDetails.subtotal) * cust_currency?.rate) | number:'1.1-2' }}</span> </span> </span> </span> </li>
+                                      <li class="subtotal real-charge real-charge-value" *ngIf="results?.OrderDetails.currency_id != results?.OrderDetails.multi_currency_id"> <strong>Total charge:</strong> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{results?.DefaultCurrency.prefix}}{{ results?.OrderDetails.total | number:'1.1-2' }}</span> </span> </span> </li>
+                                      <li class="currencyExNote" *ngIf="results?.OrderDetails.currency_id != results?.OrderDetails.multi_currency_id"> Note: All prices billed in {{results?.DefaultCurrency.code}} ({{results?.DefaultCurrency.prefix}}). Current exchange rate is {{cust_currency?.prefix}}1.00 = {{results?.DefaultCurrency.prefix}}{{ (1 / cust_currency?.rate) | number:'1.1-4' }}. </li>
+                                      <hr>
+                                      <li class="total"> <strong>Grand Total:</strong> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{cust_currency?.prefix}}{{ (results?.OrderDetails.total * cust_currency?.rate) | number:'1.1-2' }}</span> </span> </span> </li>
+                                    </ul>
+                                    <ul *ngIf="!results?.OrderDetails?.order_coupon" class="totals">
+                                      <li class="order-modifier SHIPPING-modifier shipping-code-modifier"> <strong>Shipping cost:</strong> <span class="value"> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{cust_currency?.prefix}}0.00</span> </span> </span> </span> </li>
+                                      <li class="order-modifier CDEV.VAT.1-modifier cdev.vat.1-code-modifier"> <strong>VAT:</strong> <span class="value"> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{cust_currency?.prefix}}{{ ((results?.OrderDetails.total - results?.OrderDetails.subtotal) * cust_currency?.rate) | number:'1.1-2' }}</span> </span> </span> </span> </li>
+                                      <li class="subtotal real-charge real-charge-value" *ngIf="results?.OrderDetails.currency_id != results?.OrderDetails.multi_currency_id"> <strong>Total charge:</strong> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{results?.DefaultCurrency.prefix}}{{ results?.OrderDetails.total | number:'1.1-2' }}</span> </span> </span> </li>
+                                      <li class="currencyExNote" *ngIf="results?.OrderDetails.currency_id != results?.OrderDetails.multi_currency_id"> Note: All prices billed in {{results?.DefaultCurrency.code}} ({{results?.DefaultCurrency.prefix}}). Current exchange rate is {{cust_currency?.prefix}}1.00 = {{results?.DefaultCurrency.prefix}}{{ (1 / cust_currency?.rate) | number:'1.1-4' }}. </li>
+                                      <hr>
+                                      <li class="total"> <strong>Grand Total:</strong> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{cust_currency?.prefix}}{{ (results?.OrderDetails.total * cust_currency?.rate) | number:'1.1-2' }}</span> </span> </span> </li>
+                                    </ul>
+                                  </div>
+                                  </div>
+                                </div>
+                                <div class="checkout_fastlane_section-buttons">
+                                  <div class="next-button">
+                                    <button type="button" class="btn regular-button regular-main-button checkout_fastlane_section-next" title="Click to proceed to the next step" (click)="paymentSeleted();">Proceed to payment</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div>
+                              <div class="checkout_fastlane_address_wrapper">
+                                <div class="address-box">
+                                  <div class="address-header"> Billing to: </div>
+                                  <div>
+                                    <div class="shipping_checkout">{{ billingData?.fname +' '+ billingData?.lname}}</div>
+                                    <div class="shipping_checkout">{{ billingData?.country?.code }}</div>
+                                    <div class="shipping_checkout"> {{ billingData?.addr1 }}</div>
+                                    <div class="shipping_checkout">{{ billingData?.addr2 }}</div>
+                                    <div class="shipping_checkout">{{ billingData?.city }}</div>
+                                    <div class="shipping_checkout"> {{ billingData?.post_code }}</div>
+                                    <div class="shipping_checkout"> {{ billingData?.phone }}</div>
+                                    <div class="shipping_checkout"> {{ billingData?.email }}</div>
+                                  </div>
+                                </div>
+                                <div class="address-box">
+                                  <div class="address-header"> Shipping to: <a class="checkout_fastlane_address_edit_link" (click)="addressSeleted();">Edit</a> </div>
+                                 
+                                  <div *ngIf="sameasbilling == 0 ; else other_content">
+                                    <div class="shipping_checkout">{{ shipingData?.fname +' '+ shipingData?.lname}}</div>
+                                    <div class="shipping_checkout">{{ shipingData?.country?.code }}</div>
+                                    <div class="shipping_checkout"> {{ shipingData?.addr1 }}</div>
+                                    <div class="shipping_checkout">{{ shipingData?.addr2 }}</div>
+                                    <div class="shipping_checkout">{{ shipingData?.city }}</div>
+                                    <div class="shipping_checkout"> {{ shipingData?.post_code }}</div>
+                                    <div class="shipping_checkout"> {{ shipingData?.phone }}</div>
+                                  </div>
+                                  <ng-template #other_content > same as billing </ng-template>
+                                </div>
+                              </div>
+                            </div>
+                            <div>
+                              <div class="coupons clearfix">
+                                <div class="couponInner" >
+                                  <div class="new more"> <a href="javascript:;" (click)="couponCode();"><span>Apply a coupon code</span></a> </div>
+                                  <div class="add-coupon clearfix" style="display:none">
+                                    <form action="/" method="post" accept-charset="utf-8" onSubmit="javascript: return true;" class="use-inline-error">
+                                      <span>Enter your voucher code if you have one.</span>
+                                      <div class="table-value code-value table-value-required"> <span class="input-field-wrapper input input-text">
+                                        <input id="couponcode" name="couponcode" placeholder="Enter code" type="text" value=""
+                                               autocomplete="off" maxlength="16" class=" form-control"
+                                               [ngClass]="{myclass: shouldShow}"
+                                               >
+                                        </span> </div>
+                                      <span>
+                                      <p *ngIf="reqCss" style="color: red;font-weight: 400;"> This field is required </p>
+                                      <p *ngIf="couponInvalid" style="color: red;font-weight: 400;"> Invalid coupon code, please check the spelling: " {{ couponcode }}" </p>
+                                      <p *ngIf="priceRangeInvalid" style="color: red;font-weight: 400;"> This coupon can be applied only to orders with a subtotal amount not exceeding {{ orderamount }} </p>
+                                      <p *ngIf="alreadyused" style="color: red;font-weight: 400;"> The coupon has already been used </p>
+                                      </span>
+                                      <button type="submit" class="btn regular-button submit add-coupon visible" style="display: none;" (click)="submitCouponCode()"><span>Apply Coupon</span></button>
+                                    </form>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- End Shipping -->
+					
+                    <!-- Payment  -->
+                    <div *ngIf="showaddress_isTrue && showshipping_isTrue && showpayment_isTrue">
+                      <div *ngIf="showpayment">
+                        <div style="width:100%;display: inline-flex;">
+                          <div style="width:50%">
+                            <div class="payments-wrapper">
+                              <form>
+                                <ul class="payments-radiolist">
+                                  <li *ngFor="let payment of pay_methods;">
+                                    <label for="pmethod{{payment.id}}" class="payment-list-label"> <span class="payment_checkbox">
+                                    <input type="radio" id="pmethod{{payment.id}}" name="methodId" class="selected_payment_method" checked="{{(payment.id==defaultpaymmethod)? true:false}}" attr.processing="{{ payment.processor_name}}" (click)="paymentMethodType(payment.id);" value="{{ payment.id }}" />
+                                    </span> <span class="payment_name">{{ payment.name }}</span> 
+                                    <span class="payment_logo"> <img src="{{ 'assets/images/'+payment.payment_logo }}" alt="{{ payment.name }}" title="{{ payment.name }}" class="paypal"> </span> </label></li>
+                                </ul>
+                                
+                              </form>
+                            </div>
+                            <div style="width:65%;margin-bottom: 43%;" *ngIf="sagepay">
+                              <app-sagepay></app-sagepay>
+                            </div>
+                            <div style="width:58%;margin-top:9%" *ngIf="accountTransfer">
+                              <app-deko></app-deko>
+                            </div>
+                            <div style="width:58%;margin-top:9%" *ngIf="paypal">
+                              <app-paypal></app-paypal>
+                            </div>
+                            <div style="width:58%;margin-top:9%" *ngIf="bankTransfer">
+                              <app-bank></app-bank>
+                            </div>
+                          </div>
+                          <div style="width:50%">
+                            <div class="checkout_fastlane_details_wrapper">
+                              <div class="checkout_fast lane_details_box">
+                                <div class="checkout_fastlane_cart" >
+                                  <div class="cart-items-wrapper">
+                                    <p class="cart-items-header">Order details</p>
+                                    <div class="items-row clearfix"> <a (click)="show_hide_list();" style="cursor:pointer;">{{ results?.totalCartItems }} items in cart</a> <span class="price"> <span class="surcharge"> <span class="surcharge-cell"><span class="part-prefix">{{ results?.DefaultCurrency.prefix }}</span><span class="part-integer">{{ results?.OrderDetails.total }}</span></span> </span> </span> </div>
+                                    <div *ngIf="showhideorderlist" class="list" >
+                                      <ul>
+                                        <li *ngFor="let res of results?.products;"> <a routerLink="/{{ res.clean_url.cleanURL  }}">{{ res.name }}</a> <span style="float: right;"> × <span class="qty">{{ res.amount }}</span></span> </li>
+                                      </ul>
+                                      <hr>
+                                      <a routerLink="/cart.html" class="cart">View cart</a> </div>
+                                    <div class="total clearfix" id="cart-right">
+                                    <hr>
+                                    <ul *ngIf="results?.OrderDetails?.order_coupon" class="totals">
+                                      <span *ngIf="results?.OrderDetails?.order_coupon.type">
+                                      <li *ngIf="results.OrderDetails?.order_coupon.type=='P'" class="order-modifier DCOUPON-modifier dcoupon-code-modifier"> <strong>Coupon discount:</strong> <span class="value"> <span class="surcharge"> <span class="surcharge-cell"><span class="part-integer">{{cust_currency?.prefix}}{{ ((results?.OrderDetails.total * cust_currency?.rate) * (results.OrderDetails?.order_coupon.value / 100)) | number:'1.1-2' }}</span></span> </span> </span>
+                                        <ul class="discount-coupons-panel">
+                                          <li> <span>{{results.OrderDetails?.order_coupon.code}} ({{results.OrderDetails?.order_coupon.value}} %)</span> <a href="javascript:;" (click)="removeCouponCode(results.OrderDetails?.order_coupon.id)">Remove</a> </li>
+                                        </ul>
+                                      </li>
+                                      <li *ngIf="results.OrderDetails?.order_coupon.type=='F'" class="order-modifier DCOUPON-modifier dcoupon-code-modifier"> <strong>Coupon discount:</strong> <span class="value"> <span class="surcharge"> <span class="surcharge-cell"><span class="part-integer">{{cust_currency?.prefix}}{{results.OrderDetails?.order_coupon.value}} </span></span> </span> </span>
+                                        <ul class="discount-coupons-panel">
+                                          <li> <span>{{results.OrderDetails?.order_coupon.code}}</span> <a href="javascript:;" (click)="removeCouponCode(results.OrderDetails?.order_coupon.id)">Remove</a> </li>
+                                        </ul>
+                                      </li>
+                                      </span>
+                                      <li class="order-modifier SHIPPING-modifier shipping-code-modifier"> <strong>Shipping cost:</strong> <span class="value"> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{cust_currency?.prefix}}0.00</span> </span> </span> </span> </li>
+                                      <li class="order-modifier CDEV.VAT.1-modifier cdev.vat.1-code-modifier"> <strong>VAT:</strong> <span class="value"> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{cust_currency?.prefix}}{{ ((results?.OrderDetails.total - results?.OrderDetails.subtotal) * cust_currency?.rate) | number:'1.1-2' }}</span> </span> </span> </span> </li>
+                                      <li class="subtotal real-charge real-charge-value" *ngIf="results?.OrderDetails.currency_id != results?.OrderDetails.multi_currency_id"> <strong>Total charge:</strong> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{results?.DefaultCurrency.prefix}}{{ results?.OrderDetails.total | number:'1.1-2' }}</span> </span> </span> </li>
+                                      <li class="currencyExNote" *ngIf="results?.OrderDetails.currency_id != results?.OrderDetails.multi_currency_id"> Note: All prices billed in {{results?.DefaultCurrency.code}} ({{results?.DefaultCurrency.prefix}}). Current exchange rate is {{cust_currency?.prefix}}1.00 = {{results?.DefaultCurrency.prefix}}{{ (1 / cust_currency?.rate) | number:'1.1-4' }}. </li>
+                                      <hr>
+                                      <li class="total"> <strong>Grand Total:</strong> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{cust_currency?.prefix}}{{ (results?.OrderDetails.total * cust_currency?.rate) | number:'1.1-2' }}</span> </span> </span> </li>
+                                    </ul>
+                                    <ul *ngIf="!results?.OrderDetails?.order_coupon" class="totals">
+                                      <li class="order-modifier SHIPPING-modifier shipping-code-modifier"> <strong>Shipping cost:</strong> <span class="value"> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{cust_currency?.prefix}}0.00</span> </span> </span> </span> </li>
+                                      <li class="order-modifier CDEV.VAT.1-modifier cdev.vat.1-code-modifier"> <strong>VAT:</strong> <span class="value"> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{cust_currency?.prefix}}{{ ((results?.OrderDetails.total - results?.OrderDetails.subtotal) * cust_currency?.rate) | number:'1.1-2' }}</span> </span> </span> </span> </li>
+									
+                                      <li class="subtotal real-charge real-charge-value" *ngIf="results?.OrderDetails?.currency_id != results?.OrderDetails?.multi_currency_id"> <strong>Total charge:</strong> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{results?.DefaultCurrency.prefix}}{{ results?.OrderDetails.total | number:'1.1-2' }}</span> </span> </span> </li>
+                                      <li class="currencyExNote" *ngIf="results?.OrderDetails.currency_id != results?.OrderDetails.multi_currency_id"> Note: All prices billed in {{results?.DefaultCurrency.code}} ({{results?.DefaultCurrency.prefix}}). Current exchange rate is {{cust_currency?.prefix}}1.00 = {{results?.DefaultCurrency.prefix}}{{ (1 / cust_currency?.rate) | number:'1.1-4' }}. </li>
+                                      <hr>
+                                      <li class="total"> <strong>Grand Total:</strong> <span class="surcharge"> <span class="surcharge-cell"> <span class="part-integer">{{cust_currency?.prefix}}{{ (results?.OrderDetails.total * cust_currency?.rate) | number:'1.1-2' }}</span> </span> </span> </li>
+                                    </ul>
+                                  </div>
+                                  </div>
+                                </div>
+                                <div class="checkout_fastlane_section-buttons">
+                                  <div style="padding:10px 0px;">
+                                    <input type="checkbox" name="subscribe_newsletter" class="subscribe_newsletter" (click)="subscribeNewsLetter();">
+                                    Subscribe to our newsletter </div>
+                                  <div class="next-button">
+                                    <button type="button" class="btn regular-button regular-main-button checkout_fastlane_section-next checkoutfinal" title="Click to proceed to the next step">SUBMIT</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div>
+                              <div class="checkout_fastlane_address_wrapper">
+                                <div class="address-box">
+                                  <div class="address-header"> Billing to: </div>
+                                  <div>
+                                    <div class="shipping_checkout">{{ billingData?.fname +' '+ billingData?.lname}}</div>
+                                    <div class="shipping_checkout">{{ billingData?.country?.code }}</div>
+                                    <div class="shipping_checkout"> {{ billingData?.addr1 }}</div>
+                                    <div class="shipping_checkout">{{ billingData?.addr2 }}</div>
+                                    <div class="shipping_checkout">{{ billingData?.city }}</div>
+                                    <div class="shipping_checkout"> {{ billingData?.post_code }}</div>
+                                    <div class="shipping_checkout"> {{ billingData?.phone }}</div>
+                                    <div class="shipping_checkout"> {{ billingData?.email }}</div>
+                                  </div>
+                                </div>
+                                <div class="address-box">
+                                  <div class="address-header"> Shipping to: <a class="checkout_fastlane_address_edit_link" (click)="addressSeleted();">Edit</a> </div>
+                                 
+                                  <div *ngIf="sameasbilling == 0 ; else other_content">
+                                    <div class="shipping_checkout">{{ shipingData?.fname +' '+ shipingData?.lname}}</div>
+                                    <div class="shipping_checkout">{{ shipingData?.country?.code }}</div>
+                                    <div class="shipping_checkout"> {{ shipingData?.addr1 }}</div>
+                                    <div class="shipping_checkout">{{ shipingData?.addr2 }}</div>
+                                    <div class="shipping_checkout">{{ shipingData?.city }}</div>
+                                    <div class="shipping_checkout"> {{ shipingData?.post_code }}</div>
+                                    <div class="shipping_checkout"> {{ shipingData?.phone }}</div>
+                                  </div>
+                                  <ng-template #other_content > same as billing </ng-template>
+                                </div>
+                              </div>
+                            </div>
+                            <div >
+                              <div *ngIf="notesData.length > 0" class="shipping-detail shipping-details_order-notes" style="margin-bottom:20px;">
+							  
+                                <div class="detail-header" style="margin-bottom:6px;">Order notes: <a class="checkout_fastlane_address_edit_link" (click)="shippingSeleted();">Edit</a></div>
+                                <div class="detail-content">{{ notesData }}</div>
+                              </div>
+                              <div class="shipping-detail shipping-details_selected-method" style="margin-bottom:20px;">
+                                <div class="detail-header" style="margin-bottom:6px;">Shipping method:</div>
+                                <div class="detail-content">{{ customer_shipping_method_name }}</div>
+                              </div>
+                            </div>
+                            <div>
+                              <div class="coupons clearfix">
+                                <div class="couponInner" >
+                                  <div class="new more"> <a href="javascript:;" (click)="couponCode();"><span>Apply a coupon code</span></a> </div>
+                                  <div class="add-coupon clearfix" style="display:none">
+                                    <form action="/" method="post" accept-charset="utf-8" onSubmit="javascript: return true;" class="use-inline-error">
+                                      <span>Enter your voucher code if you have one.</span>
+                                      <div class="table-value code-value table-value-required"> <span class="input-field-wrapper input input-text">
+                                        <input id="couponcode" name="couponcode" placeholder="Enter code" type="text" value=""
+                                               autocomplete="off" maxlength="16" class="validate[required,maxSize[16]] form-control"
+                                               [ngClass]="{myclass: shouldShow}"
+                                               >
+                                        </span> </div>
+                                      <span>
+                                      <p *ngIf="reqCss" style="color: red;font-weight: 400;"> This field is required </p>
+                                      <p *ngIf="couponInvalid" style="color: red;font-weight: 400;"> Invalid coupon code, please check the spelling: " {{ couponcode }}" </p>
+                                      <p *ngIf="priceRangeInvalid" style="color: red;font-weight: 400;"> This coupon can be applied only to orders with a subtotal amount not exceeding {{ orderamount }} </p>
+                                      <p *ngIf="alreadyused" style="color: red;font-weight: 400;"> The coupon has already been used </p>
+                                      </span>
+                                      <button type="submit" class="btn regular-button submit add-coupon visible" style="display: none;" (click)="submitCouponCode()"><span>Apply Coupon</span></button>
+                                    </form>
+                                  </div>
+                                </div>
+                              </div>
+                            
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- End Payment -->
+                    <div class="clearfix"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <app-footer></app-footer>
+    </div>
+  </div>
+</div>
+<app-globallogin [(visible)]="glaballogin"></app-globallogin>
+<app-dialog [(visible)]="addressbook">
+  <div>
+    <h4>PICK ADDRESS FROM ADDRESS BOOK</h4>
+  </div>
+  <div>
+    <ul>
+      <ng-container *ngIf = "custaddr.length > 0 ; else addrnotavailable" >
+        <li *ngFor="let addr of custaddr" class="addrbook" (click)="selectedCustbilladdr(addr.id)">
+          <ul>
+            <li>
+              <!-- fname  lname  -->
+              {{ addr.fname }} </li>
+            <li>
+              <!-- Address: -->
+              {{ addr.addr1 }} </li>
+            <li>
+              <!-- Address (line 2): -->
+              {{ addr.addr2 }} </li>
+            <li>
+              <!-- City,pincode -->
+              {{ addr.city }} , {{ addr.post_code }} </li>
+            <li>
+              <!-- Country: -->
+              {{ addr.country_id }} </li>
+            <li>
+              <!-- Phone: -->
+              Phone: {{ addr.phone }} </li>
+          </ul>
+        </li>
+      </ng-container>
+      <ng-template #addrnotavailable>
+         <p> Billing Address not available </p>
+      </ng-template>
+    </ul>
+  </div>
+</app-dialog>
+<app-dialog [(visible)]="shipaddressbook">
+  <div>
+    <h4>PICK ADDRESS FROM ADDRESS BOOK shipaddressbook</h4>
+  </div>
+  <div>
+    <ul>
+      <ng-container *ngIf = "custaddr.length > 0 ; else addrnotavailable" >
+        <li *ngFor="let addr of custaddr" class="addrbook" (click)="selectedCustshipaddr(addr.id)">
+          <ul>
+            <li>
+              <!-- fname  lname  -->
+              {{ addr.fname }} </li>
+            <li>
+              <!-- Address: -->
+              {{ addr.addr1 }} </li>
+            <li>
+              <!-- Address (line 2): -->
+              {{ addr.addr2 }} </li>
+            <li>
+              <!-- City,pincode -->
+              {{ addr.city }} , {{ addr.post_code }} </li>
+            <li>
+              <!-- Country: -->
+              {{ addr.country_id }} </li>
+            <li>
+              <!-- Phone: -->
+              Phone: {{ addr.phone }} </li>
+          </ul>
+        </li>
+      </ng-container>
+      <ng-template #addrnotavailable>
+         <p> Shipping Address not available </p>
+      </ng-template>
+    </ul>
+  </div>
+</app-dialog>

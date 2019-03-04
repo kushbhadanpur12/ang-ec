@@ -1,0 +1,153 @@
+<div [@dialog] *ngIf="visible" class="dialog">
+	<ng-content></ng-content>
+	<button *ngIf="closable" (click)="close()" aria-label="Close" class="dialog__close-btn">X</button>
+	 <div class="loginright">
+      <h1 style="padding-top:7%">Sign in</h1>
+       
+  <form [formGroup]="form" (ngSubmit)="LoginCustomer(form)" novalidate >
+        <table class="login-form">
+          
+  <tbody><tr>
+    <td colspan="2" class="email-label"><label for="login-email">Email:</label></td>
+  </tr>
+  <tr>
+    <td colspan="2" class="email-field field">
+     
+  <div class="table-value login-email-value table-value-required">
+    <span class="input-field-wrapper input input-text-email">
+       <input id="login-email" [(ngModel)]="email" type="text" formControlName="email"
+       (input)="somethingChanged($event.target.value)"
+       [ngClass]="{myclass: shouldShow}" 
+             >
+            
+  </span>
+  <span>                                
+      <p class="inline-error"  *ngIf="mycss && form.get('email').hasError('required') ">
+        This field is required
+        
+      </p>
+      <p class="inline-error" *ngIf="!form.get('email').hasError('required') && (form.get('email').hasError('email') || form.get('email').hasError('pattern'))">
+        Email is Invalid !
+      </p> 
+  </span>
+          </div>
+        
+    </td>
+  </tr>
+  
+  <tr>
+    <td colspan="2" class="password-label"><label for="login-password">Password:</label></td>
+  </tr>
+  <tr>
+    <td colspan="2" class="password-field field">
+      
+  
+  <div class="table-value login-password-value table-value-required">
+    <span class="input-field-wrapper input input-password">
+   
+    <input id="login-password" [(ngModel)]="password" type="password"  formControlName="password"
+    (input)="somethingChanged($event.target.value)"
+    [ngClass]="{'myclass2': passshouldShow,'form-control':true}"  >
+    
+  </span>
+  
+  <span>                                
+      <p class="inline-error"  *ngIf="mycss && form.get('password').hasError('required') ">
+        This field is required
+      </p>
+  </span>  
+    </div>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding-top:6%">
+      <p *ngIf="loginerror" style="color:red;text-align:center">
+        Invalid login or password
+          </p>
+    </td>
+  </tr>
+  <tr>
+      <td colspan="2" class="loginSubmitBtn">
+      <a href="javascript:void(0);" (click)="resetPassword = !resetPassword; closeGloballogin()"   class="forgot Forgotpasswordbtn">Forgot password?</a>
+         
+  <button type="submit" class="btn  regular-button submit" name="button" (click)="checkvalue()">
+    
+      <span>Sign in</span>
+  </button>   
+      </td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td></td>
+  </tr>
+  </tbody></table>
+      </form>
+    </div>
+</div>
+<div *ngIf="visible" class="overlay" (click)="close()"></div>
+
+<app-dialog [(visible)]="resetPassword" >
+
+ <div id="content" class="column">
+                  <div class="section"> <a id="main-content"></a>
+                    <div class="list-container" data-group="center">
+                      <div class="block block-block">
+                        <div class="content">
+                       
+                          <h1> FORGOT PASSWORD? </h1>
+
+                    <div class="recover-password-message">To reset your password, Please enter the email address associated with your user account.</div>
+                      <div class="recover-password-message">The confirmation URL link will be emailed to you shortly.
+                            </div>
+                            <form [formGroup]="form" (ngSubmit)="recoverPassword(form)" novalidate >
+                                <table class="login-form">
+                                  <tbody>
+                                    
+                                    <tr>
+                                      <td class="email-label"><label for="login-email">Email</label></td>
+                                      <td class="email-field field">
+                                         <span class="input-field-wrapper input input-text-email">
+                                                <input [(ngModel)]="email" type="text" formControlName="email" [ngClass]="{myclass: shouldShow}"  >
+                                          </span>
+                                          <span>
+                                          <p class="inline-error"  *ngIf="mycss && form.get('email').hasError('required') ">
+                                              This field is required
+                                              
+                                          </p>
+                                            <p class="inline-error" *ngIf="!form.get('email').hasError('required') && (form.get('email').hasError('email') || form.get('email').hasError('pattern'))">
+                                                Invalid email address 
+                                            </p> 
+
+                                          </span>
+                                      </td>
+                                    </tr>
+                                    
+                    
+                                    <tr style="margin-top: 6%">
+                                      <td colspan="2" >
+                                        <button type="submit" class="btn  regular-button submit" name="button" (click)="checkvalue()"> <span> Submit </span> </button>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                          <a (click)="openGloballogin();"  class="back-login log-in" style="cursor:pointer;">Back to Login form</a>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>&nbsp;</td>
+                                      <td></td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </form>
+                                
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+</app-dialog>

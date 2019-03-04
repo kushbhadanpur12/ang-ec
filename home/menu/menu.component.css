@@ -1,0 +1,8 @@
+#topMenu ul li{
+	padding: 0 22.5px;
+}
+@media (max-width:1024px){
+ #topMenu ul li a{
+ font-size: 10.5px;
+ }
+}

@@ -1,0 +1,105 @@
+.inline-error{
+    line-height: normal;
+    font-size: 10px;
+    color: #ec554e!important;
+    font-style: italic;
+    width: 100%;
+    padding-top: 1px;
+  
+}
+
+.status-messages-wrapper {
+    position: fixed;
+    z-index: 1300000;
+    display: table;
+    pointer-events: none;
+    width: 100%;
+    top: 0;
+}
+.status-messages-wrapper2 {
+    display: table-cell;
+    text-align: center;
+}
+#status-messages, #status-messages a {
+    background-color: #eeede8;
+    color: #1b5d8e;
+}
+#status-messages a.close {
+    display: block;
+    position: relative;
+    right: 8px;
+    top: 5px;
+    width: 15px;
+    height: 15px;
+    padding: 0;
+    background: transparent none;
+    opacity: 1;
+    font-size: 12px;
+    line-height: normal;
+    float: right;
+}
+.cross{
+position: absolute; 
+font-size: 40px;
+text-align: right;
+right: 0;
+}
+
+.error-style{
+    background-color: #ffcdcd !important;
+      color: #161516 !important;
+      padding: 13px;
+}
+.success-style{
+    background-color: #bae8aa !important;
+    color: #161516 !important;
+    padding: 13px;
+}
+ul li{
+    cursor: pointer;
+}
+footer .wrap .col ul li a {
+    color: #3c3d3e;
+}
+.newsletter div.table-value{
+    margin-top: 5px;
+}
+footer .wrap .col input[type="text"], input#mce-EMAIL[type="email"]{
+        font-family: 'Montserrat',sans-serif;
+}
+footer address:nth-child(1) div{
+    margin-bottom: 12px;
+    margin-top: 11px;
+}
+@media (max-width: 1024px){
+    footer .wrap .col {
+        padding-left: 20px;
+    }
+    footer .wrap .col.six {
+        width: 26.7%;
+    }
+    .LucidNewsSubscriber .btn.regular-button.main.submit{
+        float: left;
+    }
+}
+@media (max-width: 968px){
+    .LucidNewsSubscriber .btn.regular-button.main.submit{
+        margin-top: 0px;
+    }
+}
+@media (max-width: 767px){
+    footer{
+        margin-top: 0px;
+    }
+    .cq-footer-legal p.cq-legal-address{
+        padding: 5px;
+        font-size: 10px;
+        letter-spacing: 1px;
+        font-weight: 400;
+        line-height: 18px;
+    }
+    footer address:nth-child(1) div{
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+}

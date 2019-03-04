@@ -1,0 +1,29 @@
+
+<body class="">
+  <div id="page-container">
+    <div id="page-container2" class="">
+      <div id="wrapper"> 
+       <app-mobilemenu></app-mobilemenu>
+        <div id="desktopheader">
+          <app-header></app-header>
+          <app-menu></app-menu>
+          
+        </div>
+    
+        <div id="main-wrapper">   
+          <div id="main" class="clearfix">
+            <div class="innerPage">
+              <div class="mainwrap">
+
+            <div *ngFor="let r of results[0]">
+              <div innerHTML="{{r.description}}"></div>
+            </div>
+
+          </div> 
+        </div>
+        </div> 
+        </div>      
+        <app-footer></app-footer>
+      </div>
+    </div>
+  </div>

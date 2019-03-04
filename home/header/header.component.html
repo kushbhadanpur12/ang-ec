@@ -1,0 +1,150 @@
+<header>
+  <div class="headerTopBarWrap">
+    <div class="headerTopBar wrap">
+      <div class="menus">
+        <div class="topNav">
+          <ul>
+            <li *ngIf="isLoggedin()" class="contactus"><a  routerLink="/profile" class="register">My Account</a></li>
+            <li class="account-link-1 first login"><a class="log-in" (click)="glaballogin = !glaballogin" *ngIf="!isLoggedin()" style="cursor: pointer;">Sign in</a></li>
+            <li class="account-link-1 logout-style"><a (click)="logout()" *ngIf="isLoggedin()">Logout</a></li>
+            <li *ngIf="!isLoggedin()" class="contactus"><a routerLink="/registration.html" class="register">Register</a></li>
+            <li class="contactus"><a routerLink="/contactus.html">Contact Us</a></li>
+          </ul>
+          <span class="profile-login" *ngIf="isLoggedin()" > Hello <a href="/" class="register">{{ jsonResponse }}</a></span> </div>
+      </div>
+      <div class="text">
+        <ul>
+          <li>FREE DELIVERY</li>
+          <li>UP TO 60% SAVINGS</li>
+          <li>MADE IN THE UK</li>
+        </ul>
+      </div>
+      <div class="TopBarCall call"><span>0191 5800118</span></div>
+    </div>
+  </div>
+  <div class="mainwrap">
+    <div class="wrap">
+      <div class="headerSecondTopBar">
+        <div id="header-bar">
+          <div id="search" (clickOutside)="onClickedOutside()">
+            <div class="simple-search-product-form">
+              <form [formGroup]="searchstr" name="quick_search" (ngSubmit)="searchSubmit(searchstr)" novalidate >
+                <input id="searchStr" formControlName="substring" name="substring" placeholder="Enter Search" type="text" maxlength="255" class="substring-default searchStr" (input)="onSearchChange($event.target.value)" autocomplete="off">
+                
+                <div *ngIf="cat_arr?.count > 0" id="instant_search_menu" class="instant-search-menu left">
+                  <div class="block-categories" *ngIf="cat_arr?.categoriesCount > 0">
+                    <div class="header-right">Categories</div>
+                    <ul>
+                    	<li *ngFor="let cat of cat_arr?.categories"><a routerLink="/{{cat.clean.cleanUrl}}" (click)="blankQuickSearch();">{{cat.name}}</a></li>
+                    </ul>
+                  </div>
+                  <div class="block-products" *ngIf="cat_arr?.productCount > 0">
+                    <div class="header-right">Products</div>
+                    <ul>
+                    	<li *ngFor="let prod of cat_arr?.products">
+                            <div class="leftDD"><a routerLink="/{{prod.product_url.cleanUrl}}" (click)="blankQuickSearch();"><img src="{{prod.product_images[0].path}}" width="67" /></a></div>
+                            <div class="rightDD"><a routerLink="/{{prod.product_url.cleanUrl}}" (click)="blankQuickSearch();">{{prod.name}}</a></div>
+                        </li>
+                    </ul>
+                  </div>
+                  <div class="block-pages" *ngIf="cat_arr?.pageCount > 0">
+                    <div class="header-right">Pages</div>
+                    <ul>
+                    	<li *ngFor="let page of cat_arr?.pages"><a routerLink="/{{page.clean.cleanUrl}}" (click)="blankQuickSearch();">{{page.name}}</a></li>
+                    </ul>
+                  </div>
+                  <div class="see-more-results"> <a href="javascript:;" (click)="searchSubmit(searchstr);blankQuickSearch();" >See more results for "<span class="actual-search-term">{{cat_arr.searchTerm}}</span>"</a> </div>
+                </div>
+
+                <button type="submit" class="btn  regular-button submit-button submit"> <span>Search</span> </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div id="logo" class="company-logo"><a routerLink="/" title="Home" rel="home"><img src="assets/images/simplecms/logo.jpg" alt="Home" /></a></div>
+        <div id="header" class="header-right-bar">
+          <div class="language-selector collapsed">
+            <ul>
+              <li class="current" (click)="manualtoggle()"> <span class="lng"> {{ customer_currency?.suffix }} </span> </li>
+            </ul>
+            <form [formGroup]="currencyForm"  (ngSubmit)="onCurrency(currencyForm)" novalidate>
+              <div class="language-selector-main internal-popup items-list" id="currency-selector-container" [ngStyle]="{display:displayddl}">
+                <h3>Select Currency:</h3>
+                <div class="table-label currency-code-selector-label">
+                  <label for="currency-code-selector">Currency</label>
+                </div>
+                <div class="star"> &nbsp; </div>
+                <div class="table-value currency-code-selector-value"> <span class="input-field-wrapper input select-currency-customercurrency">
+                  <select id="currency-code-selector" formControlName="currency" class="form-control" [(ngModel)]="currency">
+                    <option *ngFor="let curr of currenciesAll"  value="{{curr.id}}"> {{curr.name}} </option>
+                  </select>
+                  </span> </div>
+                <div class="clear"></div>
+                <div class="table-value topCurrencySaveBtn">
+                  <button type="submit" class="btn  regular-button regular-main-button submit"> <span>Save</span> </button>
+                </div>
+                <div class="clear"></div>
+              </div>
+            </form>
+          </div>
+          <div class="topFavourites"><a class="wishlist-link" routerLink="/wishlist.html"><span>Your wishlist</span></a></div>
+          <div class="block block-block block-minicart">
+            <div class="content">
+              <div class="lc-minicart lc-minicart-horizontal collapsed empty" title="Your cart">
+                <div class="topCart"  routerLink="/cart.html"(mouseover)="hover=true" (mouseleave)="hover=false" > <a routerLink="/cart.html" id="topminiquanty" *ngIf="results?.totalCartItems>0"> {{ results?.totalCartItems }} </a>
+                  <div *ngIf="results?.totalCartItems>0" class="minicart" [ngStyle]="{display: hover==true  ? 'block' : 'none' }" >
+                    <div class="internal-popup items-list full-cart" style=" position:absolute;" ><a routerLink="/cart.html" id="topminiquanty">
+                      <div class="internal-popupwrap"></div>
+                      </a>
+                      <p class="title"><a routerLink="/cart.html" id="topminiquanty"> </a><a routerLink="/cart.html" >{{ results?.totalCartItems }} items in cart</a> </p>
+                      <ul>
+                        <li *ngFor="let res of results?.products;">
+                          <div class="item-name"> <a href="round-diamond-engagement-ring-9k-white-gold-solitaire-inverie.html">{{ res.name}}</a>
+                            <div class="clear"></div>
+                            <div class="internal-popuptop item-attribute-values item-3442">
+                              <table width="100%" class="item-attribute-values">
+                                <tbody>
+                                  <tr *ngFor="let opt of res.attr_options;">
+                                    <td align="left" valign="top"><span class="attrname">{{ opt.attribute_name }}</span></td>
+                                    <td align="left" valign="top"><span class="colon">:</span></td>
+                                    <td align="left" valign="top"> {{ opt.attribute_option_name }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td align="left" valign="top"><span class="attrname">Quantity</span></td>
+                                    <td align="left" valign="top"><span class="colon">:</span></td>
+                                    <td align="left" valign="top">{{ res.amount }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td class="last" colspan="3" align="left" valign="top"><table width="100%">
+                                        <tbody>
+                                          <tr>
+                                            <td align="left" width="70%" valign="top" class="mini-cart-surcharge"><span class="surcharge"> <span class="surcharge-cell"> {{ customer_currency?.suffix }}{{ (res.price * customer_currency?.rate) | number:'1.1-2'}}</span> </span> </td>
+                                            <td align="right" valign="top"><span><img  class="btn  regular-button remove" src="../../assets/images/deletecart.png" title="Delete" alt="Delete" style="height: 9px;" (click)="removeOrderItem(res.id,res.order_id)"></span> </td>
+                                          </tr>
+                                        </tbody>
+                                      </table></td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                          <div class="item-price"><img src="//test.angelicdiamonds.com/var/images/product/100.x/ENRD4_WG_THUMB1.jpeg" alt="Round Diamond Engagement Ring 9K White Gold Solitaire - Inverie" width="100" height="105" data-max-width="100" data-max-height="0" data-is-default-image=""> </div>
+                        </li>
+                      </ul>
+                      <p class="subtotal"> <strong>Subtotal</strong> <span>£15,622.22</span> </p>
+                      <hr>
+                      <div class="buttons-row">
+                        <button type="button" class="btn regular-button cart" routerink="/cart.html" onclick="javascript;"> <span>View my bag</span> </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<app-globallogin [(visible)]="glaballogin" ></app-globallogin>

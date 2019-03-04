@@ -1,0 +1,354 @@
+
+<body class="">
+<div id="page-container">
+  <div id="page-container2" class="">
+    <div id="wrapper">
+      <app-mobilemenu></app-mobilemenu>
+      <div id="desktopheader">
+        <app-header></app-header>
+        <app-menu></app-menu>
+      </div>
+      <div id="main-wrapper">
+        <div id="main" class="clearfix">
+          <div class="wrap clearfix page-category">
+           
+           <!-- Main Content stated Here -->
+
+				<div id="breadcrumb">
+				
+				  <ul class="breadcrumb">
+					<li class="location-node"> <a routerLink="/" class="location-title home-link"><span>Home Page</span> </a> </li>
+					<li class="location-node last"> <span class="location-text">Checkout</span> </li>
+				  </ul>
+				</div>
+
+
+				<div id="content" class="column">
+				  <div class="section"> <a id="main-content"></a>
+					<div class="list-container" data-group="center">
+					  <h1 class="title" id="page-title"><span>Thank you for your order</span></h1>
+					  <div class="order-success-box">
+						<div class="order-success-panel">
+						  <div class="dialog">
+							<div class="title">
+							  <h2>Confirmation</h2>
+							</div>
+							<div class="content">
+							  <p class="text-block">Congratulations! Your order has been successfully placed.</p>
+							  <p>Please take some time to check the details below are correct and contact us immediately if there are any issue. Our expert jewellers will now start creating your order. </p>
+							  <p>We will send you your email confirmation shortly.</p>
+							  <p class="text-block">Thank you for your purchase!</p>
+							</div>
+						  </div>
+						  <div class="content">
+							<div class="social-icon">
+							  <ul class="social-images">
+								<li><a routerLink="https://uk.pinterest.com/angelicdiamonds/" target="_blank"><img src="assets/images_theme/pinterest.png"> Pinterest</a></li>
+								<li><a routerLink="https://www.facebook.com/angelicdiamonds/" target="_blank"><img src="assets/images_theme/facebook_icon.png"> Facebook</a></li>
+								<li><a routerLink="https://twitter.com/AngelicDiamonds" target="_blank"><img src="assets/images_theme/twitter.png"> Twitter</a></li>
+								<li><a routerLink="https://plus.google.com/105418643120459485757" target="_blank"><img src="assets/images_theme/google.png"> Google +</a></li>
+								<li><a routerLink="https://www.instagram.com/angelicdiamonds/" target="_blank"><img src="assets/images_theme/instagram.png"> Instagram</a></li>
+							  </ul>
+							</div>
+						  </div>
+						  <div class="button-row-right"> &nbsp; </div>
+						  <div class="buttons-row">
+							<button type="button" class="btn  regular-button button print-invoice" style="float: right;" (click)="myfunction();">
+						   
+							<span>Print invoice</span> </button>
+						  </div>
+						  <hr class="tiny">
+						</div>
+						<div class="main-content" id="myelement">
+						  <div class="order-logo"><a rel="home" title="Home" routerLink="http://www.angelicdiamonds.com"><img src="assets/images/logo.jpg" alt="Angelic Diamonds"></a></div>
+						  <hr class="order_tophr_line">
+						  <table cellspacing="0" cellpadding="0" summary="Order details" class="order-invoice width-100">
+							<tbody>
+							  <tr>
+								<td><table cellspacing="0" cellpadding="0" summary="Summary" class="width-100">
+									<tbody>
+									  <tr>
+										<td class="invoice-data-box"><table cellspacing="0" summary="Details">
+											<tbody>
+											  <tr>
+												<td colspan="2" style="text-align:center"></td>
+											  </tr>
+											  <tr>
+												<td width="100%" id="html_order_info"><strong>Date:</strong> {{ today | date: 'medium' }}<br>
+												  <strong>Order id:</strong> #{{ orderId }}<br>
+												  <strong>Order status:</strong> {{ allOrders?.response_status}}<br>
+												  <strong>Payment method:</strong> {{ allOrders?.payment_method_name}} <br>
+												  <strong>Delivery method:</strong> {{ allOrders?.shipping_method_name}} </td>
+												<td style="font-size: 13px;" class="invoice-right-info"></td>
+											  </tr>
+											</tbody>
+										  </table></td>
+									  </tr>
+									</tbody>
+								  </table>
+								  <div class="invoice-line order_line_midle"></div>
+								  <table cellspacing="0" summary="Address" class="invoice-personal-info">
+									<tbody>
+									  <tr>
+										<td colspan="3"></td>
+									  </tr>
+									  <tr>
+										<td class="invoicePersonalInfo"><strong>Name</strong></td>
+										<td>:</td>
+										<td class="right_td">{{ billingAddr?.fname }} {{ billingAddr?.lname }}</td>
+									  </tr>
+									  <tr>
+										<td class="invoicePersonalInfo"><strong>Phone</strong> </td>
+										<td>:</td>
+										<td class="right_td">{{ billingAddr?.phone }}</td>
+									  </tr>
+									  <tr>
+										<td class="invoicePersonalInfo"><strong>Email</strong></td>
+										<td>:</td>
+										<td class="right_td">{{ profileData?.email }}</td>
+									  </tr>
+									  <tr style="display: none;">
+										<td colspan="3">&nbsp;</td>
+									  </tr>
+									</tbody>
+								  </table>
+								  <div style="clear:both"></div>
+								  <ul cellspacing="0" class="addresses">
+									<li class="address shipping">
+									  <div class="wrapper">
+										<table cellspacing="0" summary="Addresses" class="invoice-address-box">
+										  <tbody>
+											<tr>
+											  <td class="invoice-address-title"><strong>Billing address </strong>
+												<div class="invoice-line"></div></td>
+											</tr>
+											<tr>
+											  <td><table class="invoice_billing_address" cellspacing="0" summary="Billing address">
+												  <tbody>
+													<tr align="right" class="address-firstname address-field">
+													  <td width="38%"><strong>First name:</strong></td>
+													  <td class="right_td">{{ billingAddr?.fname }}</td>
+													</tr>
+													<tr align="right" class="address-lastname address-field">
+													  <td><strong>Last name:</strong></td>
+													  <td class="right_td">{{ billingAddr?.lname }}</td>
+													</tr>
+													<tr align="right" class="address-street address-field">
+													  <td><strong>Address:</strong></td>
+													  <td class="right_td">{{ billingAddr?.addr1 }}</td>
+													</tr>
+													<tr align="right" class="address-city address-field">
+													  <td><strong>City:</strong></td>
+													  <td class="right_td">{{ billingAddr?.city }}</td>
+													</tr>
+													<tr align="right" class="address-zipcode address-field"> </tr>
+													<tr align="right" class="address-country_code address-field"> </tr>
+													<tr align="right" class="address-phone address-field"> </tr>
+													<tr align="right" class="address-firstname address-field"> </tr>
+													<tr align="right" class="address-lastname address-field"> </tr>
+													<tr align="right" class="address-street address-field"> </tr>
+													<tr align="right" class="address-city address-field"> </tr>
+													<tr align="right" class="address-zipcode address-field">
+													  <td><strong>Post code:</strong></td>
+													  <td class="right_td">{{ billingAddr?.post_code }}</td>
+													</tr>
+													<tr align="right" class="address-country_code address-field"> </tr>
+													<tr align="right" class="address-phone address-field"> </tr>
+													<tr align="right" class="address-firstname address-field"> </tr>
+													<tr align="right" class="address-lastname address-field"> </tr>
+													<tr align="right" class="address-street address-field"> </tr>
+													<tr align="right" class="address-city address-field"> </tr>
+													<tr align="right" class="address-zipcode address-field"> </tr>
+													<tr align="right" class="address-country_code address-field">
+													  <td><strong>Country:</strong></td>
+													  <td class="right_td">{{ billingAddr?.country?.code }}</td>
+													</tr>
+													<tr align="right" class="address-phone address-field"> </tr>
+													<tr align="right" class="address-firstname address-field"> </tr>
+													<tr align="right" class="address-lastname address-field"> </tr>
+													<tr align="right" class="address-street address-field"> </tr>
+													<tr align="right" class="address-city address-field"> </tr>
+													<tr align="right" class="address-zipcode address-field"> </tr>
+													<tr align="right" class="address-country_code address-field"> </tr>
+													<tr align="right" class="address-phone address-field">
+													  <td><strong>Phone:</strong></td>
+													  <td class="right_td">{{ billingAddr?.phone }}</td>
+													</tr>
+												  </tbody>
+												</table></td>
+											</tr>
+										  </tbody>
+										</table>
+									  </div>
+									</li>
+								  </ul>
+								  <ul cellspacing="0" class="addresses">
+									<li class="address payment payment-wrapping mobilethanksshipping">
+									  <div class="wrapper">
+										<table cellspacing="0" summary="Addresses" class="invoice-address-box">
+										  <tbody>
+											<tr>
+											  <td class="invoice-address-title"><strong>Shipping address</strong>
+											  
+											 
+												<div class="invoice-line"></div></td>
+											</tr>
+											<tr>
+											  <td><table class="invoice_shipping_address" cellspacing="0" summary="Shipping address">
+												  <tbody>
+													<tr align="right" class="address-firstname address-field">
+													  <td width="38%"><strong>First name:</strong></td>
+													  <td align="left" class="right_td">{{ shippingAddr?.fname }}</td>
+													</tr>
+													<tr align="right" class="address-lastname address-field">
+													  <td><strong>Last name:</strong></td>
+													  <td align="left" class="right_td">{{ shippingAddr?.lname }}</td>
+													</tr>
+													<tr align="right" class="address-street address-field">
+													  <td><strong>Address:</strong></td>
+													  <td class="right_td">{{ shippingAddr?.addr1 }}</td>
+													</tr>
+													<tr align="right" class="address-address_line2 field-additional address-field">
+													  <td style="white-space:nowrap"><strong>Address (line 2):</strong></td>
+													  <td align="left" class="right_td">{{ shippingAddr?.addr2 }}</td>
+													</tr>
+													<tr align="right" class="address-city address-field">
+													  <td><strong>City:</strong></td>
+													  <td align="left" class="right_td">{{ shippingAddr?.city }}</td>
+													</tr>
+													<tr align="right" class="address-zipcode address-field"> </tr>
+													<tr align="right" class="address-country_code address-field"> </tr>
+													<tr align="right" class="address-phone address-field"> </tr>
+													<tr align="right" class="address-firstname address-field"> </tr>
+													<tr align="right" class="address-lastname address-field"> </tr>
+													<tr align="right" class="address-street address-field"> </tr>
+													<tr align="right" class="address-address_line2 field-additional address-field"> </tr>
+													<tr align="right" class="address-city address-field"> </tr>
+													<tr align="right" class="address-zipcode address-field">
+													  <td><strong>Post code:</strong></td>
+													  <td align="left" class="right_td">{{ shippingAddr?.post_code }}</td>
+													</tr>
+													<tr align="right" class="address-country_code address-field"> </tr>
+													<tr align="right" class="address-phone address-field"> </tr>
+													<tr align="right" class="address-firstname address-field"> </tr>
+													<tr align="right" class="address-lastname address-field"> </tr>
+													<tr align="right" class="address-street address-field"> </tr>
+													<tr align="right" class="address-address_line2 field-additional address-field"> </tr>
+													<tr align="right" class="address-city address-field"> </tr>
+													<tr align="right" class="address-zipcode address-field"> </tr>
+													<tr align="right" class="address-country_code address-field">
+													  <td><strong>Country:</strong></td>
+													  <td align="left" class="right_td">{{ shippingAddr?.country.code }}</td>
+													</tr>
+													<tr align="right" class="address-phone address-field"> </tr>
+													<tr align="right" class="address-firstname address-field"> </tr>
+													<tr align="right" class="address-lastname address-field"> </tr>
+													<tr align="right" class="address-street address-field"> </tr>
+													<tr align="right" class="address-address_line2 field-additional address-field"> </tr>
+													<tr align="right" class="address-city address-field"> </tr>
+													<tr align="right" class="address-zipcode address-field"> </tr>
+													<tr align="right" class="address-country_code address-field"> </tr>
+													<tr align="right" class="address-phone address-field">
+													  <td><strong>Phone:</strong></td>
+													  <td align="left" class="right_td">{{ shippingAddr?.phone }}</td>
+													</tr>
+												  </tbody>
+												</table></td>
+											</tr>
+										  </tbody>
+										</table>
+									  </div>
+									</li>
+								  </ul>
+								  <div style="clear:both"></div></td>
+							  </tr>
+							</tbody>
+						  </table>
+						  <div class="invoice-box">
+							<table cellspacing="0" class="items invoice_product_details">
+							  <tbody>
+								<tr>
+								  <th class="item">SKU</th>
+								  <th class="item">Product Detail</th>
+								  <th class="price">Price</th>
+								  <th class="qty">Quantity</th>
+								  <th class="total">Grand Total</th>
+								</tr>
+								<tr *ngFor="let item of orderItems">
+								  <td class="sku">{{ item.sku}}</td>
+								  <td class="item"><a routerLink="halo-round-diamond-engagement-ring-18k-white-gold-diletta.html" class="item-name">{{ item.name }}</a>
+									<table width="100%" style="background:none; border:none" border="0">
+									  <tbody>
+										<tr>
+										  <td class="td-product-infor" style="background:none;border:none"><div class="item-attribute-values">
+											  <ul class="selected-attribute-values" *ngFor="let option of item.attr_options">
+												<li class="item-attribute-values-list-item"> <span class="attrname">{{ option.attribute_name }}</span><span class="colon"> : </span>{{ option.attribute_option_name }} </li>
+											  </ul>
+											</div>
+										</td>
+										</tr>
+									  </tbody>
+									</table></td>
+								  <td class="price">{{ multicurr?.prefix }} {{ item.total }}</td>
+								  <td class="qty">{{ item.amount }}</td>
+								  <td class="total"> {{ multicurr?.prefix }} {{ item.subtotal }}</td>
+								</tr>
+							  </tbody>
+							</table>
+							<ul class="totals simple-list">
+							  <li>
+								<div class="title title_box_mng">Subtotal:</div>
+								<div class="value value_box_mng" style="text-align:right">{{ multicurr?.prefix }} {{ allOrders?.subtotal }}</div>
+							  </li>
+							  <li class="order-modifier SHIPPING-modifier shipping-code-modifier">
+								<div class="title title_box_mng"> Shipping cost: </div>
+								<div class="value value_box_mng">  0.00 </div>
+							  </li>
+							  <li class="order-modifier CDEV.VAT.1-modifier cdev.vat.1-code-modifier">
+								<div class="title title_box_mng"> VAT: </div>
+								<div class="value value_box_mng"> {{ multicurr?.prefix }} {{ allOrders?.total - allOrders?.subtotal }} </div>
+							  </li>
+							  <li class="total">
+								<div class="title title_box_mng grandtotatal_box">Grand total:</div>
+								<div class="value value_box_mng grandtotatal_values">{{ multicurr?.prefix }} {{ allOrders?.total }}</div>
+							  </li>
+							</ul>
+							
+							<div style="clear:both"></div>
+							<div style="clear:both"></div>
+							<table cellspacing="0" cellpadding="0" summary="Order details" class="order-invoice width-100">
+							  <tbody>
+								<tr>
+								  <td align="center"><div class="buttom-company-address"> <strong>Angelic Diamonds</strong>
+									  <p> 13 Easter Park<br>
+										Cramlington, NE23 1WQ<br>
+										United Kingdom<br>
+										Phone: 0191 5800118<br>
+										<span class="url"> <a routerLink="/">http://www.angelicdiamonds.com</a> </span>
+									  </p>
+									</div>
+									<br>
+									<br>
+									<font style="float: left; font-size: 12px; text-align: center; width: 100%;">Thank you for your purchase! VAT No. GB 236884079</font><br>
+									<br>
+									<br>
+									<div class="order-invoice-continue-shopping"><a routerLink="/">Continue Shopping</a></div></td>
+								</tr>
+							  </tbody>
+							</table>
+						  </div>
+						</div>
+					  </div>
+					</div>
+				  </div>
+				</div>
+		   
+		   <!-- Main Content End Here -->
+           
+          </div>
+        </div>
+      </div>
+      <app-footer></app-footer>
+    </div>
+  </div>
+</div>
